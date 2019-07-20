@@ -130,7 +130,6 @@ let arrowDimen = [
 
   function preload() {
     bg = loadImage('assets/paper.jpg'); // background paper
-    image masks
 
     for (let i = 1; i < 4; i++){
       maskImg[i] = [];
