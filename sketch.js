@@ -127,35 +127,34 @@ let arrowDimen = [
   let breath;
 
 
-  //_________________________________________________________
 
   function preload() {
     bg = loadImage('assets/paper.jpg'); // background paper
     // image masks
-
-    for (let i = 1; i < 4; i++){
-      maskImg[i] = [];
-      for (let j = 1; j < 6; j++) {
-      maskImg[i][j] = loadImage('assets/m'+ i + '-' + j + '.png') // brush loader
-      }
-    }
-    // brush set
-    for (let i = 1; i < 26; i++) {
-      brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
-    }
-
-    for (let i = 1; i < 5; i++) {
-      arrow[i] = loadImage('assets/arrow' + i + '.png') // brush loader
-    }
-
-   audio = loadSound('assets/audio.mp3');
+   //
+   //  for (let i = 1; i < 4; i++){
+   //    maskImg[i] = [];
+   //    for (let j = 1; j < 6; j++) {
+   //    maskImg[i][j] = loadImage('assets/m'+ i + '-' + j + '.png') // brush loader
+   //    }
+   //  }
+   //  // brush set
+   //  for (let i = 1; i < 26; i++) {
+   //    brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
+   //  }
+   //
+   //  for (let i = 1; i < 5; i++) {
+   //    arrow[i] = loadImage('assets/arrow' + i + '.png') // brush loader
+   //  }
+   //
+   // audio = loadSound('assets/audio.mp3');
 
   }
 
   function setup() {
     createCanvas(windowWidth, windowHeight);
     pixelDensity(1); // Ignores retina displays
-  // 
+  //
   //   blendMode(BLEND);
   //   colorMode(RGB, 255, 255, 255, 1);
   //   // Set initial colour
@@ -195,9 +194,9 @@ let arrowDimen = [
   //   rectMode(CENTER);
   //   randomCoord();
     backdrop();
-    findLongEdge();
-    writeTextUI();
-    textAlign(CENTER, CENTER);
+    // findLongEdge();
+    // writeTextUI();
+    // textAlign(CENTER, CENTER);
 
     //  onScreenText();
   }
