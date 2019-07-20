@@ -197,7 +197,7 @@ let arrowDimen = [
     writeTextUI();
     textAlign(CENTER, CENTER);
 
-     onScreenText();
+    
   }
 
   function makeDots() {
