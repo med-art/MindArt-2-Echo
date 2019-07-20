@@ -107,7 +107,7 @@
 let arrowDimen = [
   [1, 55, 90],
   [2, 55, 90],
-  [3, 4, 45, 10, 55, 90],
+  [3, 45, 10, 4, 55, 90],
   [1, 110,110],
   [1, 110,110]
 ] // for now, last two are false dimensions, until v.02. ALSO, first value is always which version of arrow. Again, a cheat for now.
@@ -144,7 +144,7 @@ let arrowDimen = [
       brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
     }
 
-    for (i = 1; i < 4; i++) {
+    for (i = 1; i < 5; i++) {
       arrow[i] = loadImage('assets/arrow' + i + '.png') // brush loader
     }
 
@@ -189,7 +189,7 @@ let arrowDimen = [
 
     wmax = width / 100;
     hmax = height / 100;
-    brushSize = wmax * 9;
+    brushSize = wmax * 7;
     title = inter5title;
     interTextCurrent = inter5text;
     rectMode(CENTER);
@@ -209,7 +209,16 @@ let arrowDimen = [
     for (let i = 0; i < dotDimen[layerState].length; i += 2) {
       dotLayer.circle(int(wmax * dotDimen[layerState][i]), int(hmax * dotDimen[layerState][i + 1]), wmax * 1.5);
     }
-   dotLayer.image(arrow[arrowDimen[layerState][0]], int(wmax * arrowDimen[layerState][1]), int(hmax * arrowDimen[layerState][2]), 20, 40);
+
+dotLayer.image(arrow[arrowDimen[layerState][0]], int(wmax * arrowDimen[layerState][1]), int(hmax * arrowDimen[layerState][2]), 20, 40);
+
+if(arrowDimen[layerState].length > 3 ){
+  dotLayer.image(arrow[arrowDimen[layerState][3]], int(wmax * arrowDimen[layerState][4]), int(hmax * arrowDimen[layerState][5]), 20, 40);
+
+}
+
+
+
     image(dotLayer, 0, 0);
 
   }
@@ -342,11 +351,8 @@ image(breathLayer, 0, 0, width, height);
 
         pg.rotate(random(-rotateDrift, rotateDrift));
 
-        pg.image(brush[9], 0 - (scalar * brushSize / 2), 0 - (scalar * brushSize / 2), scalar * brushSize, scalar * brushSize);
-        // pg.translate(-winMouseX, -winMouseY);
-        //     pg.translate(pwinMouseX, pwinMouseY);
-        //     // pg.tint((red + randDrift)*1.2, (green + randDrift)*1.2, (blue + randDrift)*1.2, 2); // Display at half opacity
-        //     // pg.image(brush[9], 0 - (scalar*brushSize), 0 - (scalar*brushSize), scalar*brushSize*2, scalar*brushSize*2);
+      //  pg.image(brush[9], 0 - (scalar * brushSize / 2), 0 - (scalar * brushSize / 2), scalar * brushSize, scalar * brushSize);
+      pg.image(brush[9], 0-brushSize / 2, 0-brushSize / 2, brushSize, brushSize);
 
         pg.pop();
 
@@ -448,7 +454,7 @@ breathLayer.clear();
       interTextCurrent = inter1text;
       intermissionState = 1;
           makeDots();
-      brushSize = wmax * 9;
+      brushSize = wmax * 7;
       red = swatch1[0][0];
       green = swatch1[0][1];
       blue = swatch1[0][2];
@@ -461,7 +467,7 @@ breathLayer.clear();
       interTextCurrent = inter2text;
       intermissionState = 1;
           makeDots();
-      brushSize = wmax * 7;
+      brushSize = wmax * 6;
       red = swatch1[1][0];
       green = swatch1[1][1];
       blue = swatch1[1][2];
@@ -473,7 +479,7 @@ breathLayer.clear();
       interTextCurrent = inter3text;
       intermissionState = 1;
           makeDots();
-      brushSize = wmax * 6;
+      brushSize = wmax * 5;
       red = swatch1[2][0];
       green = swatch1[2][1];
       blue = swatch1[2][2];
@@ -485,7 +491,7 @@ breathLayer.clear();
       interTextCurrent = inter4text;
       intermissionState = 1;
           makeDots();
-      brushSize = wmax * 5;
+      brushSize = wmax * 4;
       red = swatch1[3][0];
       green = swatch1[3][1];
       blue = swatch1[3][2];
@@ -497,7 +503,7 @@ breathLayer.clear();
       interTextCurrent = inter5text;
       intermissionState = 1;
           makeDots();
-      brushSize = wmax * 4;
+      brushSize = wmax * 3;
       red = swatch1[4][0];
       green = swatch1[4][1];
       blue = swatch1[4][2];
@@ -543,6 +549,12 @@ else{
     button3.mousePressed(restart);
   }
 
+function swatchSwitch(){
+swatchCount++;
+
+
+}
+
   function restart() {
 
     currentGraphic = 0;
@@ -561,6 +573,7 @@ else{
     }
     backdrop();
     stateChanger();
+    swatchSwitch();
 
 
 
