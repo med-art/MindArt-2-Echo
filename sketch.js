@@ -98,7 +98,7 @@
 
   let dotDimen = [
     [50, 10, 50, 90],
-    [80, 10, 50, 90],
+    [80, 10, 30, 90],
     [50, 10, 50, 90, 35, 50, 65, 50],
     [20, 10, 80, 10, 50, 90],
     [10, 50, 30, 10, 70, 10, 50, 90, 90, 50],
@@ -106,7 +106,7 @@
 
 let arrowDimen = [
   [1, 55, 90],
-  [2, 55, 90],
+  [2, 35, 90],
   [3, 45, 10, 4, 55, 90],
   [1, 110,110],
   [1, 110,110]
@@ -140,11 +140,11 @@ let arrowDimen = [
       }
     }
     // brush set
-    for (i = 1; i < 26; i++) {
+    for (let i = 1; i < 26; i++) {
       brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
     }
 
-    for (i = 1; i < 5; i++) {
+    for (let i = 1; i < 5; i++) {
       arrow[i] = loadImage('assets/arrow' + i + '.png') // brush loader
     }
 
@@ -168,12 +168,12 @@ let arrowDimen = [
     dotLayer = createGraphics(width, height);
 
     // create the layers to store landscape figures
-    for (i = 0; i < numOfLayers; i++) {
+    for (let i = 0; i < numOfLayers; i++) {
       layer[i + 1] = createGraphics(width, height);
     }
 
     // createGraphics
-    for (i = 0; i < numOfGraphics; i++) {
+    for (let i = 0; i < numOfGraphics; i++) {
 
       pgResize[i] = createGraphics(width / 20, height / 20);
     }
@@ -181,7 +181,7 @@ let arrowDimen = [
     pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
 
     //resize layers // replace the stop with list length
-    for (i = 1; i < 3; i++) {
+    for (let i = 1; i < 3; i++) {
           for (j = 1; j < 6; j++){
       maskImg[i][j].resize(width, height); // brush loader
     }
@@ -210,10 +210,10 @@ let arrowDimen = [
       dotLayer.circle(int(wmax * dotDimen[layerState][i]), int(hmax * dotDimen[layerState][i + 1]), wmax * 1.5);
     }
 
-dotLayer.image(arrow[arrowDimen[layerState][0]], int(wmax * arrowDimen[layerState][1]), int(hmax * arrowDimen[layerState][2]), 20, 40);
+dotLayer.image(arrow[arrowDimen[layerState][0]], int(wmax * arrowDimen[layerState][1]), int(hmax * arrowDimen[layerState][2]), wmax, wmax*2);
 
 if(arrowDimen[layerState].length > 3 ){
-  dotLayer.image(arrow[arrowDimen[layerState][3]], int(wmax * arrowDimen[layerState][4]), int(hmax * arrowDimen[layerState][5]), 20, 40);
+  dotLayer.image(arrow[arrowDimen[layerState][3]], int(wmax * arrowDimen[layerState][4]), int(hmax * arrowDimen[layerState][5]), wmax, wmax*2);
 
 }
 
@@ -294,7 +294,7 @@ image(breathLayer, 0, 0, width, height);
   }
 
   function randomCoord() {
-    for (i = 0; i < 100000; i++) {
+    for (let i = 0; i < 100000; i++) {
       randWidth[i] = int(randomGaussian(-300, width));
       randHeight[i] = int(randomGaussian(-300, height));
     }
@@ -323,7 +323,9 @@ image(breathLayer, 0, 0, width, height);
 
         backdrop();
         breathLayer.clear();
-        breathe("inhale");
+
+      if (layerState <3){breathe("inhale");}
+
         intermissionState = 0;
         image(dotLayer, 0, 0, width, height);
       }
@@ -391,23 +393,23 @@ image(breathLayer, 0, 0, width, height);
   }
 
   function makeLandscape(){
-    for (i = 0; i < 80000; i++) {
+    for (let i = 0; i < 80000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
       layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], 70, 70); // replace with scalar
     }
-    for (i = 0; i < 40000; i++) {
+    for (let i = 0; i < 40000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
       layer[2].image(pgResize[randomInt + 5], randWidth[i], randHeight[i], 70, 70); // replace with scalar
     }
-    for (i = 0; i < 30000; i++) {
+    for (let i = 0; i < 30000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
       layer[3].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], 70, 70); // replace with scalar
     }
-    for (i = 0; i < 20000; i++) {
+    for (let i = 0; i < 20000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
       layer[4].image(pgResize[randomInt + 15], randWidth[i], randHeight[i], 70, 70); // replace with scalar
     }
-    for (i = 0; i < 20000; i++) {
+    for (let i = 0; i < 20000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
       layer[5].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], 70, 70); // replace with scalar
     }
@@ -510,7 +512,7 @@ breathLayer.clear();
     }
 
 else{
-    breathe("exhale");
+      if (layerState <3){breathe("exhale");}
 }
 
     image(dotLayer, 0, 0, width, height);
@@ -561,10 +563,10 @@ swatchCount++;
     introState = 1;
     intermissionState = 0
     endState = 0;
-    for (i = 0; i < numOfGraphics; i++) {
+    for (let i = 0; i < numOfGraphics; i++) {
       pgResize[i].clear();
     }
-    for (i = 0; i < numOfLayers; i++) {
+    for (let i = 0; i < numOfLayers; i++) {
       layer[i + 1].clear();
     }
     maskVer++;
