@@ -155,45 +155,45 @@ let arrowDimen = [
   function setup() {
     createCanvas(windowWidth, windowHeight);
     pixelDensity(1); // Ignores retina displays
-
-    blendMode(BLEND);
-    colorMode(RGB, 255, 255, 255, 1);
-    // Set initial colour
-    red = swatch1[0][0];
-    green = swatch1[0][1];
-    blue = swatch1[0][2];
-
-    breathLayer = createGraphics(width, height);
-
-    dotLayer = createGraphics(width, height);
-
-    // create the layers to store landscape figures
-    for (let i = 0; i < numOfLayers; i++) {
-      layer[i + 1] = createGraphics(width, height);
-    }
-
-    // createGraphics
-    for (let i = 0; i < numOfGraphics; i++) {
-
-      pgResize[i] = createGraphics(width / 20, height / 20);
-    }
-
-    pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
-
-    //resize layers // replace the stop with list length
-    for (let i = 1; i < 3; i++) {
-          for (j = 1; j < 6; j++){
-      maskImg[i][j].resize(width, height); // brush loader
-    }
-  }
-
-    wmax = width / 100;
-    hmax = height / 100;
-    brushSize = wmax * 7;
-    title = inter5title;
-    interTextCurrent = inter5text;
-    rectMode(CENTER);
-    randomCoord();
+  // 
+  //   blendMode(BLEND);
+  //   colorMode(RGB, 255, 255, 255, 1);
+  //   // Set initial colour
+  //   red = swatch1[0][0];
+  //   green = swatch1[0][1];
+  //   blue = swatch1[0][2];
+  //
+  //   breathLayer = createGraphics(width, height);
+  //
+  //   dotLayer = createGraphics(width, height);
+  //
+  //   // create the layers to store landscape figures
+  //   for (let i = 0; i < numOfLayers; i++) {
+  //     layer[i + 1] = createGraphics(width, height);
+  //   }
+  //
+  //   // createGraphics
+  //   for (let i = 0; i < numOfGraphics; i++) {
+  //
+  //     pgResize[i] = createGraphics(width / 20, height / 20);
+  //   }
+  //
+  //   pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
+  //
+  //   //resize layers // replace the stop with list length
+  //   for (let i = 1; i < 3; i++) {
+  //         for (j = 1; j < 6; j++){
+  //     maskImg[i][j].resize(width, height); // brush loader
+  //   }
+  // }
+  //
+  //   wmax = width / 100;
+  //   hmax = height / 100;
+  //   brushSize = wmax * 7;
+  //   title = inter5title;
+  //   interTextCurrent = inter5text;
+  //   rectMode(CENTER);
+  //   randomCoord();
     backdrop();
     findLongEdge();
     writeTextUI();
@@ -332,65 +332,65 @@ image(breathLayer, 0, 0, width, height);
     }
   }
 
-  // function touchMoved() {
-  //
-  //   if (timer > 999 && endState === 0) {
-  //
-  //
-  //     intermissionState = 0;
-  //     if (currentGraphic < numOfGraphics + 2) {
-  //
-  //       let randDrift = random(-drift, drift);
-  //
-  //       pg.tint(red + randDrift, green + randDrift, blue + randDrift); // Display at half opacity
-  //
-  //       pg.push();
-  //       let scalarsmoother = scalar;
-  //       scalar = (scalarsmoother + (constrain(100 * (random(3, abs(winMouseX - pwinMouseX)) / windowWidth), 0.3, 3))) / 2;
-  //
-  //
-  //       pg.translate(winMouseX, winMouseY);
-  //
-  //       pg.rotate(random(-rotateDrift, rotateDrift));
-  //
-  //     //  pg.image(brush[9], 0 - (scalar * brushSize / 2), 0 - (scalar * brushSize / 2), scalar * brushSize, scalar * brushSize);
-  //     pg.image(brush[9], 0-brushSize / 2, 0-brushSize / 2, brushSize, brushSize);
-  //
-  //       pg.pop();
-  //
-  //       image(pg, 0, 0, width, height);
-  //
-  //
-  //
-  //     }
-  //   }
-  //
-  //   return false;
-  // }
-  //
-  // function touchEnded() {
-  //
-  //
-  //   if (timer > 999 && endState === 0) {
-  //     // need to include - https://stackoverflow.com/questions/47363844/how-do-i-resize-a-p5-graphic-object
-  //     noTint();
-  //     if (currentGraphic === numOfGraphics - 2) {
-  //       updateGraphics();
-  //       backdrop();
-  //       blendMode(DARKEST);
-  //       endText();
-  //       makeLandscape();
-  //
-  //
-  //     } else {
-  //
-  //       updateGraphics();
-  //
-  //     }
-  //   }
-  //
-  //   return false;
-  // }
+  function touchMoved() {
+
+    if (timer > 999 && endState === 0) {
+
+
+      intermissionState = 0;
+      if (currentGraphic < numOfGraphics + 2) {
+
+        let randDrift = random(-drift, drift);
+
+        pg.tint(red + randDrift, green + randDrift, blue + randDrift); // Display at half opacity
+
+        pg.push();
+        let scalarsmoother = scalar;
+        scalar = (scalarsmoother + (constrain(100 * (random(3, abs(winMouseX - pwinMouseX)) / windowWidth), 0.3, 3))) / 2;
+
+
+        pg.translate(winMouseX, winMouseY);
+
+        pg.rotate(random(-rotateDrift, rotateDrift));
+
+      //  pg.image(brush[9], 0 - (scalar * brushSize / 2), 0 - (scalar * brushSize / 2), scalar * brushSize, scalar * brushSize);
+      pg.image(brush[9], 0-brushSize / 2, 0-brushSize / 2, brushSize, brushSize);
+
+        pg.pop();
+
+        image(pg, 0, 0, width, height);
+
+
+
+      }
+    }
+
+    return false;
+  }
+
+  function touchEnded() {
+
+
+    if (timer > 999 && endState === 0) {
+      // need to include - https://stackoverflow.com/questions/47363844/how-do-i-resize-a-p5-graphic-object
+      noTint();
+      if (currentGraphic === numOfGraphics - 2) {
+        updateGraphics();
+        backdrop();
+        blendMode(DARKEST);
+        endText();
+        makeLandscape();
+
+
+      } else {
+
+        updateGraphics();
+
+      }
+    }
+
+    return false;
+  }
 
   function makeLandscape(){
     for (let i = 0; i < 80000; i++) {
