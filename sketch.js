@@ -148,7 +148,7 @@ let arrowDimen = [
       arrow[i] = loadImage('assets/arrow' + i + '.png') // brush loader
     }
 
-  //  audio = loadSound('assets/audio.mp3');
+   audio = loadSound('assets/audio.mp3');
 
   }
 
@@ -234,36 +234,36 @@ if(arrowDimen[layerState].length > 3 ){
 
 
 
-  function draw() {
-
-    if (introState) {
-  textSize(wmax*2.5);
-      fill(50, 50, 50, 0.01);
-      //textAlign(CENTER, CENTER); - WTF?
-      textStyle(BOLD);
-      text(introTitle, windowWidth / 2, hmax * 20, width * 0.8, height);
-      textStyle(ITALIC);
-      text(introSub, width / 2, hmax * 35, width * 0.8, height);
-      textStyle(NORMAL);
-      text(introText, width / 2, hmax * 55, width * 0.8, height);
-
-    }
-    if (intermissionState) {
-
-      timer = millis() - tempMillis;
-
-
-      textSize(wmax*2.5);
-      fill(40, 35, 30, 0.01);
-      textStyle(BOLD);
-      text(title, windowWidth / 2, height / 2.5, width * 0.5, height);
-      textStyle(NORMAL);
-      text(interTextCurrent, width / 2, height / 2, width * 0.8, height);
-
-
-    }
-
-  }
+  // function draw() {
+  //
+  //   if (introState) {
+  // textSize(wmax*2.5);
+  //     fill(50, 50, 50, 0.01);
+  //     //textAlign(CENTER, CENTER); - WTF?
+  //     textStyle(BOLD);
+  //     text(introTitle, windowWidth / 2, hmax * 20, width * 0.8, height);
+  //     textStyle(ITALIC);
+  //     text(introSub, width / 2, hmax * 35, width * 0.8, height);
+  //     textStyle(NORMAL);
+  //     text(introText, width / 2, hmax * 55, width * 0.8, height);
+  //
+  //   }
+  //   if (intermissionState) {
+  //
+  //     timer = millis() - tempMillis;
+  //
+  //
+  //     textSize(wmax*2.5);
+  //     fill(40, 35, 30, 0.01);
+  //     textStyle(BOLD);
+  //     text(title, windowWidth / 2, height / 2.5, width * 0.5, height);
+  //     textStyle(NORMAL);
+  //     text(interTextCurrent, width / 2, height / 2, width * 0.8, height);
+  //
+  //
+  //   }
+  //
+  // }
 
   function breathe(breath) {
 
@@ -316,7 +316,7 @@ image(breathLayer, 0, 0, width, height);
       tempMillis = millis();
       stateChanger();
       introState = 0;
-      //audio.loop();
+      audio.loop();
 
     } else {
       if (timer > 999 && endState === 0) {
@@ -332,65 +332,65 @@ image(breathLayer, 0, 0, width, height);
     }
   }
 
-  function touchMoved() {
-
-    if (timer > 999 && endState === 0) {
-
-
-      intermissionState = 0;
-      if (currentGraphic < numOfGraphics + 2) {
-
-        let randDrift = random(-drift, drift);
-
-        pg.tint(red + randDrift, green + randDrift, blue + randDrift); // Display at half opacity
-
-        pg.push();
-        let scalarsmoother = scalar;
-        scalar = (scalarsmoother + (constrain(100 * (random(3, abs(winMouseX - pwinMouseX)) / windowWidth), 0.3, 3))) / 2;
-
-
-        pg.translate(winMouseX, winMouseY);
-
-        pg.rotate(random(-rotateDrift, rotateDrift));
-
-      //  pg.image(brush[9], 0 - (scalar * brushSize / 2), 0 - (scalar * brushSize / 2), scalar * brushSize, scalar * brushSize);
-      pg.image(brush[9], 0-brushSize / 2, 0-brushSize / 2, brushSize, brushSize);
-
-        pg.pop();
-
-        image(pg, 0, 0, width, height);
-
-
-
-      }
-    }
-
-    return false;
-  }
-
-  function touchEnded() {
-
-
-    if (timer > 999 && endState === 0) {
-      // need to include - https://stackoverflow.com/questions/47363844/how-do-i-resize-a-p5-graphic-object
-      noTint();
-      if (currentGraphic === numOfGraphics - 2) {
-        updateGraphics();
-        backdrop();
-        blendMode(DARKEST);
-        endText();
-        makeLandscape();
-
-
-      } else {
-
-        updateGraphics();
-
-      }
-    }
-
-    return false;
-  }
+  // function touchMoved() {
+  //
+  //   if (timer > 999 && endState === 0) {
+  //
+  //
+  //     intermissionState = 0;
+  //     if (currentGraphic < numOfGraphics + 2) {
+  //
+  //       let randDrift = random(-drift, drift);
+  //
+  //       pg.tint(red + randDrift, green + randDrift, blue + randDrift); // Display at half opacity
+  //
+  //       pg.push();
+  //       let scalarsmoother = scalar;
+  //       scalar = (scalarsmoother + (constrain(100 * (random(3, abs(winMouseX - pwinMouseX)) / windowWidth), 0.3, 3))) / 2;
+  //
+  //
+  //       pg.translate(winMouseX, winMouseY);
+  //
+  //       pg.rotate(random(-rotateDrift, rotateDrift));
+  //
+  //     //  pg.image(brush[9], 0 - (scalar * brushSize / 2), 0 - (scalar * brushSize / 2), scalar * brushSize, scalar * brushSize);
+  //     pg.image(brush[9], 0-brushSize / 2, 0-brushSize / 2, brushSize, brushSize);
+  //
+  //       pg.pop();
+  //
+  //       image(pg, 0, 0, width, height);
+  //
+  //
+  //
+  //     }
+  //   }
+  //
+  //   return false;
+  // }
+  //
+  // function touchEnded() {
+  //
+  //
+  //   if (timer > 999 && endState === 0) {
+  //     // need to include - https://stackoverflow.com/questions/47363844/how-do-i-resize-a-p5-graphic-object
+  //     noTint();
+  //     if (currentGraphic === numOfGraphics - 2) {
+  //       updateGraphics();
+  //       backdrop();
+  //       blendMode(DARKEST);
+  //       endText();
+  //       makeLandscape();
+  //
+  //
+  //     } else {
+  //
+  //       updateGraphics();
+  //
+  //     }
+  //   }
+  //
+  //   return false;
+  // }
 
   function makeLandscape(){
     for (let i = 0; i < 80000; i++) {
