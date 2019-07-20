@@ -160,15 +160,15 @@ let arrowDimen = [
     red = swatch1[0][0];
     green = swatch1[0][1];
     blue = swatch1[0][2];
-  //
-  //   breathLayer = createGraphics(width, height);
-  //
-  //   dotLayer = createGraphics(width, height);
-  //
-  //   // create the layers to store landscape figures
-  //   for (let i = 0; i < numOfLayers; i++) {
-  //     layer[i + 1] = createGraphics(width, height);
-  //   }
+  
+    breathLayer = createGraphics(width, height);
+
+    dotLayer = createGraphics(width, height);
+
+    // create the layers to store landscape figures
+    for (let i = 0; i < numOfLayers; i++) {
+      layer[i + 1] = createGraphics(width, height);
+    }
   //
   //   // createGraphics
   //   for (let i = 0; i < numOfGraphics; i++) {
