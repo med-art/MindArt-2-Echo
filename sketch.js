@@ -177,14 +177,14 @@ let arrowDimen = [
     }
 
     pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
-  
-  //   //resize layers // replace the stop with list length
-  //   for (let i = 1; i < 3; i++) {
-  //         for (j = 1; j < 6; j++){
-  //     maskImg[i][j].resize(width, height); // brush loader
-  //   }
-  // }
-  //
+
+    //resize layers // replace the stop with list length
+    for (let i = 1; i < 3; i++) {
+          for (let j = 1; j < 6; j++){
+      maskImg[i][j].resize(width, height); // brush loader
+    }
+  }
+
   //   wmax = width / 100;
   //   hmax = height / 100;
   //   brushSize = wmax * 7;
