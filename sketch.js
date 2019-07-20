@@ -160,7 +160,7 @@ let arrowDimen = [
     red = swatch1[0][0];
     green = swatch1[0][1];
     blue = swatch1[0][2];
-  
+
     breathLayer = createGraphics(width, height);
 
     dotLayer = createGraphics(width, height);
@@ -169,15 +169,15 @@ let arrowDimen = [
     for (let i = 0; i < numOfLayers; i++) {
       layer[i + 1] = createGraphics(width, height);
     }
-  //
-  //   // createGraphics
-  //   for (let i = 0; i < numOfGraphics; i++) {
-  //
-  //     pgResize[i] = createGraphics(width / 20, height / 20);
-  //   }
-  //
-  //   pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
-  //
+
+    // createGraphics
+    for (let i = 0; i < numOfGraphics; i++) {
+
+      pgResize[i] = createGraphics(width / 20, height / 20);
+    }
+
+    pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
+  
   //   //resize layers // replace the stop with list length
   //   for (let i = 1; i < 3; i++) {
   //         for (j = 1; j < 6; j++){
