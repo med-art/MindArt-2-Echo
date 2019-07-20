@@ -29,6 +29,8 @@
   var randHeight = [];
   const strokeSize = 50;
 
+  let arrow = [];
+
   let swatch1 = [
     [188, 179, 164],
     [131, 114, 104],
@@ -96,23 +98,33 @@
 
   let dotDimen = [
     [50, 10, 50, 90],
-    [20, 10, 50, 90],
     [80, 10, 50, 90],
+    [50, 10, 50, 90, 35, 50, 65, 50],
     [20, 10, 80, 10, 50, 90],
     [10, 50, 30, 10, 70, 10, 50, 90, 90, 50],
-  ]
-  // dots are defined by X then Y coordinates. If 2 dots, then X,Y,X,Y, etc.
+  ] // dots are defined by X then Y coordinates. If 2 dots, then X,Y,X,Y, etc.
+
+let arrowDimen = [
+  [1, 55, 90],
+  [2, 55, 90],
+  [3, 4, 45, 10, 55, 90],
+  [1, 110,110],
+  [1, 110,110]
+] // for now, last two are false dimensions, until v.02. ALSO, first value is always which version of arrow. Again, a cheat for now.
+
   let dotTempArray = [];
 
   let dotLayer;
 
   let layerState = 1;
 
-  let brushSize
+  let brushSize = 8;
 
   let breathState = 0;
 
   let maskVer = 1; // tracks which landscape version
+
+  let breath;
 
 
   //_________________________________________________________
@@ -131,6 +143,13 @@
     for (i = 1; i < 26; i++) {
       brush[i] = loadImage('assets/br-' + i + '.png') // brush loader
     }
+
+    for (i = 1; i < 4; i++) {
+      arrow[i] = loadImage('assets/arrow' + i + '.png') // brush loader
+    }
+
+  //  audio = loadSound('assets/audio.mp3');
+
   }
 
   function setup() {
@@ -143,6 +162,8 @@
     red = swatch1[0][0];
     green = swatch1[0][1];
     blue = swatch1[0][2];
+
+    breathLayer = createGraphics(width, height);
 
     dotLayer = createGraphics(width, height);
 
@@ -182,13 +203,24 @@
   }
 
   function makeDots() {
-    dotLayer.fill(110);
+    dotLayer.fill(180, 175, 190);
     dotLayer.noStroke();
     dotTempArray = dotDimen[layerState];
     for (let i = 0; i < dotDimen[layerState].length; i += 2) {
       dotLayer.circle(int(wmax * dotDimen[layerState][i]), int(hmax * dotDimen[layerState][i + 1]), wmax * 1.5);
     }
+   dotLayer.image(arrow[arrowDimen[layerState][0]], int(wmax * arrowDimen[layerState][1]), int(hmax * arrowDimen[layerState][2]), 20, 40);
     image(dotLayer, 0, 0);
+
+  }
+
+  function endText(){
+
+
+    textSize(wmax*2.5);
+        fill(50, 50, 50, 0.01);
+        textStyle(NORMAL);
+        text(confirmationText, width / 2, hmax * 55, width * 0.8, height);
   }
 
 
@@ -196,15 +228,15 @@
   function draw() {
 
     if (introState) {
-
+  textSize(wmax*2.5);
       fill(50, 50, 50, 0.01);
       //textAlign(CENTER, CENTER); - WTF?
       textStyle(BOLD);
-      text(introTitle, windowWidth / 2, hmax * 25, width * 0.8, height * 0.2);
+      text(introTitle, windowWidth / 2, hmax * 20, width * 0.8, height);
       textStyle(ITALIC);
-      text(introSub, width / 2, hmax * 35, width * 0.8, height * 0.2);
+      text(introSub, width / 2, hmax * 35, width * 0.8, height);
       textStyle(NORMAL);
-      text(introText, width / 2, hmax * 55, width * 0.8, height * 0.2);
+      text(introText, width / 2, hmax * 55, width * 0.8, height);
 
     }
     if (intermissionState) {
@@ -212,36 +244,35 @@
       timer = millis() - tempMillis;
 
 
-
-      fill(50, 50, 50, 0.01);
+      textSize(wmax*2.5);
+      fill(40, 35, 30, 0.01);
       textStyle(BOLD);
-      text(title, windowWidth / 2, height / 2.5, width * 0.8, height * 0.2);
+      text(title, windowWidth / 2, height / 2.5, width * 0.5, height);
       textStyle(NORMAL);
-      text(interTextCurrent, width / 2, height / 2, width * 0.8, height * 0.2);
-      makeDots();
+      text(interTextCurrent, width / 2, height / 2, width * 0.8, height);
+
 
     }
-
 
   }
 
-  function breathe() {
+  function breathe(breath) {
 
-    fill(120, 110, 115, 1);
-    textStyle(NORMAL);
-    textAlign(RIGHT);
-    textSize(30);
+    breathLayer.fill(150);
+    breathLayer.textStyle(NORMAL);
+    breathLayer.textAlign(RIGHT);
+    breathLayer.textSize(wmax*2.5);
 
-    if (breathState) {
-      text("Inhale", width-50, height / 2);
+if (breath === "exhale"){
+    breathLayer.text(breath, width-50, height / 1.9);
+}
 
-    } else {
-      text("Exhale", width-50, height / 2);
-    }
+else if (breath === "inhale"){
+    breathLayer.text(breath, width-50, height / 2.1);
+}
+image(breathLayer, 0, 0, width, height);
 
-    textAlign(CENTER);
-    breathState = !breathState;
-      console.log(breathState);
+
   }
 
 
@@ -276,12 +307,14 @@
       tempMillis = millis();
       stateChanger();
       introState = 0;
+      //audio.loop();
 
     } else {
       if (timer > 999 && endState === 0) {
 
         backdrop();
-        breathe();
+        breathLayer.clear();
+        breathe("inhale");
         intermissionState = 0;
         image(dotLayer, 0, 0, width, height);
       }
@@ -337,47 +370,54 @@
         updateGraphics();
         backdrop();
         blendMode(DARKEST);
+        endText();
+        makeLandscape();
 
-        for (i = 0; i < 80000; i++) {
-          randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-          layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-        }
-        for (i = 0; i < 40000; i++) {
-          randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-          layer[2].image(pgResize[randomInt + 5], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-        }
-        for (i = 0; i < 30000; i++) {
-          randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-          layer[3].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-        }
-        for (i = 0; i < 20000; i++) {
-          randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-          layer[4].image(pgResize[randomInt + 15], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-        }
-        for (i = 0; i < 20000; i++) {
-          randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-          layer[5].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-        }
-
-        layer[1].image(maskImg[maskVer][1], 0, 0);
-        image(layer[1], 0, 0);
-        layer[2].image(maskImg[maskVer][2], 0, 0);
-        image(layer[2], 0, 0);
-        layer[3].image(maskImg[maskVer][3], 0, 0);
-        image(layer[3], 0, 0);
-        layer[4].image(maskImg[maskVer][4], 0, 0);
-        image(layer[4], 0, 0);
-        layer[5].image(maskImg[maskVer][5], 0, 0);
-        image(layer[5], 0, 0);
-        randomCoord();
-        endState = 1;
 
       } else {
+
         updateGraphics();
+
       }
     }
 
     return false;
+  }
+
+  function makeLandscape(){
+    for (i = 0; i < 80000; i++) {
+      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+      layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+    }
+    for (i = 0; i < 40000; i++) {
+      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+      layer[2].image(pgResize[randomInt + 5], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+    }
+    for (i = 0; i < 30000; i++) {
+      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+      layer[3].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+    }
+    for (i = 0; i < 20000; i++) {
+      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+      layer[4].image(pgResize[randomInt + 15], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+    }
+    for (i = 0; i < 20000; i++) {
+      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+      layer[5].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+    }
+
+    layer[1].image(maskImg[maskVer][1], 0, 0);
+    image(layer[1], 0, 0);
+    layer[2].image(maskImg[maskVer][2], 0, 0);
+    image(layer[2], 0, 0);
+    layer[3].image(maskImg[maskVer][3], 0, 0);
+    image(layer[3], 0, 0);
+    layer[4].image(maskImg[maskVer][4], 0, 0);
+    image(layer[4], 0, 0);
+    layer[5].image(maskImg[maskVer][5], 0, 0);
+    image(layer[5], 0, 0);
+    randomCoord();
+    endState = 1;
   }
 
   function updateGraphics() {
@@ -386,7 +426,7 @@
     pg.clear();
 
     backdrop(); // display backgrond
-
+breathLayer.clear();
 
     tempMillis = millis();
 
@@ -407,55 +447,65 @@
       layerState = 0;
       interTextCurrent = inter1text;
       intermissionState = 1;
+          makeDots();
+      brushSize = wmax * 9;
       red = swatch1[0][0];
       green = swatch1[0][1];
       blue = swatch1[0][2];
     }
 
-    if (currentGraphic === 5) {
+    else if (currentGraphic === 5) {
       dotLayer.clear();
       title = inter2title;
       layerState = 1;
       interTextCurrent = inter2text;
       intermissionState = 1;
+          makeDots();
       brushSize = wmax * 7;
       red = swatch1[1][0];
       green = swatch1[1][1];
       blue = swatch1[1][2];
     }
-    if (currentGraphic === 10) {
+    else if (currentGraphic === 10) {
       dotLayer.clear();
       title = inter3title;
       layerState = 2;
       interTextCurrent = inter3text;
       intermissionState = 1;
-      brushSize = wmax * 5;
+          makeDots();
+      brushSize = wmax * 6;
       red = swatch1[2][0];
       green = swatch1[2][1];
       blue = swatch1[2][2];
     }
-    if (currentGraphic === 15) {
+  else if (currentGraphic === 15) {
       dotLayer.clear();
       title = inter4title;
       layerState = 3;
       interTextCurrent = inter4text;
       intermissionState = 1;
-      brushSize = wmax * 3;
+          makeDots();
+      brushSize = wmax * 5;
       red = swatch1[3][0];
       green = swatch1[3][1];
       blue = swatch1[3][2];
     }
-    if (currentGraphic === 20) {
+    else if (currentGraphic === 20) {
       dotLayer.clear();
       title = inter5title;
       layerState = 4;
       interTextCurrent = inter5text;
       intermissionState = 1;
-      brushSize = wmax * 1.5;
+          makeDots();
+      brushSize = wmax * 4;
       red = swatch1[4][0];
       green = swatch1[4][1];
       blue = swatch1[4][2];
     }
+
+else{
+    breathe("exhale");
+}
 
     image(dotLayer, 0, 0, width, height);
 
@@ -510,7 +560,7 @@
       maskVer = 1;
     }
     backdrop();
-    stateChanger;
+    stateChanger();
 
 
 
