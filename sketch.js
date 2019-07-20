@@ -154,13 +154,13 @@ let arrowDimen = [
   function setup() {
     createCanvas(windowWidth, windowHeight);
     pixelDensity(1); // Ignores retina displays
-  //
-  //   blendMode(BLEND);
-  //   colorMode(RGB, 255, 255, 255, 1);
-  //   // Set initial colour
-  //   red = swatch1[0][0];
-  //   green = swatch1[0][1];
-  //   blue = swatch1[0][2];
+
+    blendMode(BLEND);
+    colorMode(RGB, 255, 255, 255, 1);
+    // Set initial colour
+    red = swatch1[0][0];
+    green = swatch1[0][1];
+    blue = swatch1[0][2];
   //
   //   breathLayer = createGraphics(width, height);
   //
