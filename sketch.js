@@ -154,45 +154,45 @@ let arrowDimen = [
   function setup() {
     createCanvas(windowWidth, windowHeight);
     pixelDensity(1); // Ignores retina displays
-  //
-  //   blendMode(BLEND);
-  //   colorMode(RGB, 255, 255, 255, 1);
-  //   // Set initial colour
-  //   red = swatch1[0][0];
-  //   green = swatch1[0][1];
-  //   blue = swatch1[0][2];
-  //
-  //   breathLayer = createGraphics(width, height);
-  //
-  //   dotLayer = createGraphics(width, height);
-  //
-  //   // create the layers to store landscape figures
-  //   for (let i = 0; i < numOfLayers; i++) {
-  //     layer[i + 1] = createGraphics(width, height);
-  //   }
-  //
-  //   // createGraphics
-  //   for (let i = 0; i < numOfGraphics; i++) {
-  //
-  //     pgResize[i] = createGraphics(width / 20, height / 20);
-  //   }
-  //
-  //   pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
-  //
-  //   //resize layers // replace the stop with list length
-  //   for (let i = 1; i < 3; i++) {
-  //         for (j = 1; j < 6; j++){
-  //     maskImg[i][j].resize(width, height); // brush loader
-  //   }
-  // }
-  //
-  //   wmax = width / 100;
-  //   hmax = height / 100;
-  //   brushSize = wmax * 7;
-  //   title = inter5title;
-  //   interTextCurrent = inter5text;
-  //   rectMode(CENTER);
-  //   randomCoord();
+
+    blendMode(BLEND);
+    colorMode(RGB, 255, 255, 255, 1);
+    // Set initial colour
+    red = swatch1[0][0];
+    green = swatch1[0][1];
+    blue = swatch1[0][2];
+
+    breathLayer = createGraphics(width, height);
+
+    dotLayer = createGraphics(width, height);
+
+    // create the layers to store landscape figures
+    for (let i = 0; i < numOfLayers; i++) {
+      layer[i + 1] = createGraphics(width, height);
+    }
+
+    // createGraphics
+    for (let i = 0; i < numOfGraphics; i++) {
+
+      pgResize[i] = createGraphics(width / 20, height / 20);
+    }
+
+    pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
+
+    //resize layers // replace the stop with list length
+    for (let i = 1; i < 3; i++) {
+          for (j = 1; j < 6; j++){
+      maskImg[i][j].resize(width, height); // brush loader
+    }
+  }
+
+    wmax = width / 100;
+    hmax = height / 100;
+    brushSize = wmax * 7;
+    title = inter5title;
+    interTextCurrent = inter5text;
+    rectMode(CENTER);
+    randomCoord();
     backdrop();
     // findLongEdge();
     // writeTextUI();
