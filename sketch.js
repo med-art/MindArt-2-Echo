@@ -130,7 +130,7 @@ let arrowDimen = [
 
   function preload() {
     bg = loadImage('assets/paper.jpg'); // background paper
-
+    image masks
 
     for (let i = 1; i < 4; i++){
       maskImg[i] = [];
@@ -154,10 +154,10 @@ let arrowDimen = [
   function setup() {
     createCanvas(windowWidth, windowHeight);
     pixelDensity(1); // Ignores retina displays
-
-    blendMode(BLEND);
-    colorMode(RGB, 255, 255, 255, 1);
-    // Set initial colour
+  //
+  //   blendMode(BLEND);
+  //   colorMode(RGB, 255, 255, 255, 1);
+  //   // Set initial colour
   //   red = swatch1[0][0];
   //   green = swatch1[0][1];
   //   blue = swatch1[0][2];
