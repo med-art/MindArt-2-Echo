@@ -185,19 +185,19 @@ let arrowDimen = [
     }
   }
 
-  //   wmax = width / 100;
-  //   hmax = height / 100;
-  //   brushSize = wmax * 7;
-  //   title = inter5title;
-  //   interTextCurrent = inter5text;
-  //   rectMode(CENTER);
-  //   randomCoord();
+    wmax = width / 100;
+    hmax = height / 100;
+    brushSize = wmax * 7;
+    title = inter5title;
+    interTextCurrent = inter5text;
+    rectMode(CENTER);
+    randomCoord();
     backdrop();
-    // findLongEdge();
-    // writeTextUI();
-    // textAlign(CENTER, CENTER);
+    findLongEdge();
+    writeTextUI();
+    textAlign(CENTER, CENTER);
 
-    //  onScreenText();
+     onScreenText();
   }
 
   function makeDots() {
@@ -232,36 +232,36 @@ if(arrowDimen[layerState].length > 3 ){
 
 
 
-  // function draw() {
-  //
-  //   if (introState) {
-  // textSize(wmax*2.5);
-  //     fill(50, 50, 50, 0.01);
-  //     //textAlign(CENTER, CENTER); - WTF?
-  //     textStyle(BOLD);
-  //     text(introTitle, windowWidth / 2, hmax * 20, width * 0.8, height);
-  //     textStyle(ITALIC);
-  //     text(introSub, width / 2, hmax * 35, width * 0.8, height);
-  //     textStyle(NORMAL);
-  //     text(introText, width / 2, hmax * 55, width * 0.8, height);
-  //
-  //   }
-  //   if (intermissionState) {
-  //
-  //     timer = millis() - tempMillis;
-  //
-  //
-  //     textSize(wmax*2.5);
-  //     fill(40, 35, 30, 0.01);
-  //     textStyle(BOLD);
-  //     text(title, windowWidth / 2, height / 2.5, width * 0.5, height);
-  //     textStyle(NORMAL);
-  //     text(interTextCurrent, width / 2, height / 2, width * 0.8, height);
-  //
-  //
-  //   }
-  //
-  // }
+  function draw() {
+
+    if (introState) {
+  textSize(wmax*2.5);
+      fill(50, 50, 50, 0.01);
+      //textAlign(CENTER, CENTER); - WTF?
+      textStyle(BOLD);
+      text(introTitle, windowWidth / 2, hmax * 20, width * 0.8, height);
+      textStyle(ITALIC);
+      text(introSub, width / 2, hmax * 35, width * 0.8, height);
+      textStyle(NORMAL);
+      text(introText, width / 2, hmax * 55, width * 0.8, height);
+
+    }
+    if (intermissionState) {
+
+      timer = millis() - tempMillis;
+
+
+      textSize(wmax*2.5);
+      fill(40, 35, 30, 0.01);
+      textStyle(BOLD);
+      text(title, windowWidth / 2, height / 2.5, width * 0.5, height);
+      textStyle(NORMAL);
+      text(interTextCurrent, width / 2, height / 2, width * 0.8, height);
+
+
+    }
+
+  }
 
   function breathe(breath) {
 
