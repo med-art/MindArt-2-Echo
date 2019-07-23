@@ -294,7 +294,7 @@ image(breathLayer, 0, 0, width, height);
       introState = 0;
       audio.loop();
 
-    } else {
+    } else if {
       if (timer > 999 && endState === 0) {
 
         backdrop();
