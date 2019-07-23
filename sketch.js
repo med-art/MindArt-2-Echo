@@ -382,11 +382,11 @@ image(breathLayer, 0, 0, width, height);
 
   function createEnd(){
     restartAvailable = 1;
-    textSize(lmax*3);
+    textSize(lmax*4);
         fill(40, 40, 55);
         textStyle(NORMAL);
 
-        text("Touch to restart", wmax*70, hmax * 90, width, height);
+        text("Touch to restart", wmax*75, hmax * 90, width, height);
 
   }
 
