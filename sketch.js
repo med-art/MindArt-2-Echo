@@ -300,7 +300,7 @@ image(breathLayer, 0, 0, width, height);
     image(bg, 0, 0, width, height); // display backgrond
   }
 
-  function touchStarted() {
+  function mousePressed() {
 
 
 
@@ -327,7 +327,7 @@ image(breathLayer, 0, 0, width, height);
     return false;
   }
 
-  function touchMoved() {
+  function mouseDragged() {
 
     if (timer > 999 && endState === 0) {
 
