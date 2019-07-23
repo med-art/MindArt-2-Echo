@@ -82,7 +82,7 @@ let maskDiff = 100;
   let dotDimen = [
     [50, 10, 50, 90],
     [80, 10, 30, 90],
-    [50, 10, 50, 90, 35, 50, 65, 50],
+    [50, 10, 50, 90, 28, 50, 72, 50],
     [20, 10, 80, 10, 50, 90],
     [10, 50, 30, 10, 70, 10, 50, 90, 90, 50],
   ] // dots are defined by X then Y coordinates. If 2 dots, then X,Y,X,Y, etc.
@@ -200,7 +200,7 @@ if(arrowDimen[layerState].length > 3 ){
   function endText(){
 
 
-    textSize(wmax*2);
+    textSize(lmax*2);
         fill(50, 50, 50, 1);
         textStyle(NORMAL);
         text(confirmationText, width / 2, hmax * 50, width * 0.8, height);
@@ -211,7 +211,7 @@ if(arrowDimen[layerState].length > 3 ){
   function draw() {
 
     if (introState) {
-  textSize(wmax*2.5);
+  textSize(lmax*2.5);
       fill(50, 50, 50, 0.01);
       //textAlign(CENTER, CENTER); - WTF?
       textStyle(BOLD);
@@ -227,7 +227,7 @@ if(arrowDimen[layerState].length > 3 ){
       timer = millis() - tempMillis;
 
 
-      textSize(wmax*2.5);
+      textSize(lmax*2.5);
       fill(40, 35, 30, 0.01);
       textStyle(BOLD);
       text(title, windowWidth / 2, hmax*20, width * 0.5, height);
@@ -244,7 +244,7 @@ if(arrowDimen[layerState].length > 3 ){
     breathLayer.fill(150);
     breathLayer.textStyle(NORMAL);
     breathLayer.textAlign(RIGHT);
-    breathLayer.textSize(wmax*2.5);
+    breathLayer.textSize(lmax*2.5);
 
 if (breath === "exhale"){
     breathLayer.text(breath, width-wmax*20, height / 1.9);
@@ -262,8 +262,10 @@ image(breathLayer, 0, 0, width, height);
   function findLongEdge() {
     if (width > height) {
       longEdge = width;
+      lmax = width/100;
     } else {
       longEdge = height;
+      lmax = height/100;
     }
   }
 
@@ -384,7 +386,7 @@ image(breathLayer, 0, 0, width, height);
 
     for (let i = 0; i < 20000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-      layer[5].image(pgResize[randomInt + 40], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
+      layer[5].image(pgResize[randomInt + 40], randWidth[i], randHeight[i], wmax*7, wmax*7); // replace with scalar
     }
 
     layer[1].image(maskImg[maskVer][1], 0, 0, width, height);
@@ -413,7 +415,7 @@ breathLayer.clear();
 
     stateChanger();
 
-    textSize(wmax * 3);
+    textSize(lmax * 3);
     fill(80);
     image(dotLayer, 0, 0, width, height);
   }
@@ -450,7 +452,7 @@ breathLayer.clear();
       blue = swatch[colSwitch][5];
       for (let i = 0; i < 80000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
+        layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], wmax*7, wmax*7); // replace with scalar
       }
     }
     else if (currentGraphic === 20) {
@@ -468,7 +470,7 @@ breathLayer.clear();
       blue = swatch[colSwitch][8];
       for (let i = 0; i < 40000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[2].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
+        layer[2].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], wmax*7, wmax*7); // replace with scalar
       }
     }
   else if (currentGraphic === 30) {
@@ -486,7 +488,7 @@ breathLayer.clear();
       blue = swatch[colSwitch][11];
       for (let i = 0; i < 30000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[3].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
+        layer[3].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], wmax*7, wmax*7); // replace with scalar
       }
     }
     else if (currentGraphic === 40) {
@@ -504,7 +506,7 @@ breathLayer.clear();
       blue = swatch[colSwitch][14];
       for (let i = 0; i < 20000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[4].image(pgResize[randomInt + 30], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
+        layer[4].image(pgResize[randomInt + 30], randWidth[i], randHeight[i], wmax*7, wmax*7); // replace with scalar
       }
     }
 
