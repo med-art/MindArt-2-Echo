@@ -222,7 +222,7 @@ if(arrowDimen[layerState].length > 3 ){
     textSize(wmax*2);
         fill(50, 50, 50, 1);
         textStyle(NORMAL);
-        text(confirmationText, width / 2, hmax * 5, width * 0.8, height);
+        text(confirmationText, width / 2, hmax * 50, width * 0.8, height);
   }
 
 
@@ -376,7 +376,7 @@ image(breathLayer, 0, 0, width, height);
         blendMode(DARKEST);
         endText();
 
-        setTimeout(makeLandscape, 1000);
+        setTimeout(makeLandscape, 3000);
 
 
 
