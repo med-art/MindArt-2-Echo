@@ -79,6 +79,8 @@ let maskDiff = 100;
 
   let wmax, hmax;
 
+  let restartAvailable = 0;
+
   let dotDimen = [
     [50, 10, 50, 90],
     [80, 10, 30, 90],
@@ -305,7 +307,7 @@ image(breathLayer, 0, 0, width, height);
         image(dotLayer, 0, 0, width, height);
       }
 
-    else if (endState === 1) {
+    else if (restartAvailable === 1) {
       restart();
     }
 
@@ -362,7 +364,8 @@ image(breathLayer, 0, 0, width, height);
         endText();
 
         setTimeout(makeLandscape, 3000);
-        writeTextUI();
+      //  writeTextUI(); not working
+      setTimeout(createEnd, 6000);
 
 
 
@@ -375,6 +378,15 @@ image(breathLayer, 0, 0, width, height);
     }
 
     return false;
+  }
+
+  function createEnd(){
+    restartAvailable = 1;
+    textSize(lmax*2);
+        fill(50, 50, 50, 1);
+        textStyle(NORMAL);
+        text("Touch to restart", width / 2, hmax * 50, width * 0.8, height);
+
   }
 
   function makeLandscape(){
@@ -554,9 +566,9 @@ else{
 
 
   function restart() {
-
+    restartAvailable = 0;
     currentGraphic = 0;
-    introState = 1;
+    introState = 0;
     intermissionState = 0
     endState = 0;
     for (let i = 0; i < numOfGraphics; i++) {
@@ -569,7 +581,7 @@ else{
     if (maskVer === 4){
       maskVer = 1;
     }
-    button3.remove();
+
     backdrop();
     stateChanger();
 
