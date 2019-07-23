@@ -382,10 +382,10 @@ image(breathLayer, 0, 0, width, height);
 
   function createEnd(){
     restartAvailable = 1;
-    textSize(lmax*2);
-        fill(50, 50, 50, 1);
+    textSize(lmax*6);
+        fill(0, 0, 0, 1);
         textStyle(NORMAL);
-        text("Touch to restart", width / 2, hmax * 50, width * 0.8, height);
+        text("Touch to restart", width / 2, hmax * 50, wmax*10, height);
 
   }
 
@@ -544,32 +544,32 @@ else{
   }
 
 
-  function writeTextUI() {
-    textSize(longEdge / 50);
-    fill(0);
-    noStroke();
-
-    let vmax = longEdge / 100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
-    let textMargin = longEdge / 100; // consolidate into above - no point having 2
-
-    button3 = createButton('Restart');
-    button3.position(windowWidth - (10 * vmax) - (textMargin * 5), windowHeight - vmax * 6);
-    colH3 = color(355, 87, 74);
-
-    button3.style('background-color', colH3);
-    button3.style('font-size', '2.1vmax');
-    button3.style('color', 'white');
-    button3.style('border-radius', '0.5vmax')
-    button3.style('width', '14vmax')
-    button3.mousePressed(restart);
-  }
+  // function writeTextUI() {
+  //   textSize(longEdge / 50);
+  //   fill(0);
+  //   noStroke();
+  //
+  //   let vmax = longEdge / 100; // suspect we may have issue here with IOS in terms of rotation and measuring height, etc
+  //   let textMargin = longEdge / 100; // consolidate into above - no point having 2
+  //
+  //   button3 = createButton('Restart');
+  //   button3.position(windowWidth - (10 * vmax) - (textMargin * 5), windowHeight - vmax * 6);
+  //   colH3 = color(355, 87, 74);
+  //
+  //   button3.style('background-color', colH3);
+  //   button3.style('font-size', '2.1vmax');
+  //   button3.style('color', 'white');
+  //   button3.style('border-radius', '0.5vmax')
+  //   button3.style('width', '14vmax')
+  //   button3.mousePressed(restart);
+  // }
 
 
   function restart() {
     restartAvailable = 0;
     currentGraphic = 0;
     introState = 0;
-    intermissionState = 0
+    intermissionState = 1;
     endState = 0;
     for (let i = 0; i < numOfGraphics; i++) {
       pgResize[i].clear();
