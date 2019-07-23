@@ -9,9 +9,9 @@
   let brush = [];
 
   // COLOUR VARAIABLES
-  let red;
-  let green;
-  let blue;
+  let red = 0;
+  let green = 0;
+  let blue = 0;
   const drift = 25;
   const rotateDrift = 0.1;
 
@@ -20,7 +20,7 @@
   const numOfLayers = 5;
   let currentLayer = 1;
   let currentGraphic = 0;
-  let randomInt; // divides brush array
+  let randomInt = 0; // divides brush array
 
   //ImageMask
   let maskImg = [];
@@ -555,11 +555,6 @@ else{
     button3.mousePressed(restart);
   }
 
-function swatchSwitch(){
-swatchCount++;
-
-
-}
 
   function restart() {
 
