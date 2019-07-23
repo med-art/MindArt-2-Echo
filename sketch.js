@@ -16,7 +16,7 @@
   const rotateDrift = 0.1;
 
   //graphics controller
-  const numOfGraphics = 25;
+  const numOfGraphics = 50;
   const numOfLayers = 5;
   let currentLayer = 1;
   let currentGraphic = 0;
@@ -31,35 +31,17 @@
 
   let arrow = [];
 
-  let swatch1 = [
-    [223, 234, 166],
-    [117, 174, 67],
-    [173, 209, 57],
-    [20, 110, 56],
-    [29, 53, 27]
-  ]; // ref all swatch docs in the assets folder for reference imagery
+  let colSwitch = 0;
 
-  let swatch2 = [
-    [172, 224, 186],
-    [114, 155, 123],
-    [67, 114, 95],
-    [152, 55, 24],
-    [20, 44, 31]
+let maskDiff = 100;
+
+  let swatch = [
+    [223, 234, 166, 117, 174, 67, 173, 209, 57, 20, 110, 56, 29, 53, 27],
+    [172, 224, 186, 114, 155, 123, 67, 114, 95, 27, 61, 45, 20, 44, 31],
+    [231, 201, 139, 174, 133, 79, 127, 94, 59, 55, 42, 26, 34, 26, 23],
+    [229, 205, 176, 176, 148, 110, 103, 92, 83, 30, 29, 33,  11, 11, 14]
   ];
-  let swatch3 = [
-    [231, 201, 139],
-    [174, 133, 79],
-    [127, 94, 59],
-    [55, 42, 26],
-    [34, 26, 23]
-  ];
-  let swatch4 = [
-    [229, 205, 176],
-    [176, 148, 110],
-    [103, 92, 83],
-    [30, 29, 33],
-    [11, 11, 14]
-  ];
+// note that all the above colours are in RGB sequence. ie. R,G,B,R,G,B,R,G,B,R,G,B,R,G,B
 
   let scalar = 0;
 
@@ -91,7 +73,7 @@
   let inter4text = "4) This time you have three dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 4th landscape texture";
 
   let inter5title = "";
-  let inter5text = "5) For the 5 th step you have 5 dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 5th  landscape texture";
+  let inter5text = "5) For the 5th step you have 5 dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 5th  landscape texture";
 
   let confirmationText = "Congratulations, this is your ‘Echo’ landscape";
 
@@ -135,7 +117,7 @@ let arrowDimen = [
     for (let i = 1; i < 4; i++){
       maskImg[i] = [];
       for (let j = 1; j < 6; j++) {
-      maskImg[i][j] = loadImage('assets/m'+ i + '-' + j + '.png') // brush loader
+      maskImg[i][j] = loadImage('assets/m'+ i + '-' + j + '.png') // mask loader
       }
     }
     // brush set
@@ -144,7 +126,7 @@ let arrowDimen = [
     }
 
     for (let i = 1; i < 5; i++) {
-      arrow[i] = loadImage('assets/arrow' + i + '.png') // brush loader
+      arrow[i] = loadImage('assets/arrow' + i + '.png') // arrow loader
     }
 
    audio = loadSound('assets/audio.mp3');
@@ -158,9 +140,9 @@ let arrowDimen = [
     blendMode(BLEND);
     colorMode(RGB, 255, 255, 255, 1);
     // Set initial colour
-    red = swatch1[0][0];
-    green = swatch1[0][1];
-    blue = swatch1[0][2];
+    red = swatch[0][0];
+    green = swatch[0][1];
+    blue = swatch[0][2];
 
     breathLayer = createGraphics(width, height);
 
@@ -189,7 +171,6 @@ let arrowDimen = [
     randomCoord();
     backdrop();
     findLongEdge();
-    writeTextUI();
     textAlign(CENTER, CENTER);
 
 
@@ -377,6 +358,7 @@ image(breathLayer, 0, 0, width, height);
         endText();
 
         setTimeout(makeLandscape, 3000);
+        setTimeout(writeTextUI, 6000);
 
 
 
@@ -397,9 +379,12 @@ image(breathLayer, 0, 0, width, height);
     blendMode(DARKEST);
 
 
+    layer[5].fill(red, green, blue, maskDiff);
+    layer[5].rect(0,0,width,height);
+
     for (let i = 0; i < 20000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-      layer[5].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+      layer[5].image(pgResize[randomInt + 40], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
     }
 
     layer[1].image(maskImg[maskVer][1], 0, 0, width, height);
@@ -445,12 +430,12 @@ breathLayer.clear();
       intermissionState = 1;
           makeDots();
       brushSize = wmax * 7;
-      red = swatch1[0][0];
-      green = swatch1[0][1];
-      blue = swatch1[0][2];
+      red = swatch[colSwitch][0];
+      green = swatch[colSwitch][1];
+      blue = swatch[colSwitch][2];
     }
 
-    else if (currentGraphic === 5) {
+    else if (currentGraphic === 10) {
       dotLayer.clear();
       title = inter2title;
       layerState = 1;
@@ -458,15 +443,17 @@ breathLayer.clear();
       intermissionState = 1;
           makeDots();
       brushSize = wmax * 6;
-      red = swatch1[1][0];
-      green = swatch1[1][1];
-      blue = swatch1[1][2];
+      layer[1].fill(red, green, blue, maskDiff);
+      layer[1].rect(0,0,width,height);
+      red = swatch[colSwitch][3];
+      green = swatch[colSwitch][4];
+      blue = swatch[colSwitch][5];
       for (let i = 0; i < 80000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+        layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
       }
     }
-    else if (currentGraphic === 10) {
+    else if (currentGraphic === 20) {
       dotLayer.clear();
       title = inter3title;
       layerState = 2;
@@ -474,15 +461,17 @@ breathLayer.clear();
       intermissionState = 1;
           makeDots();
       brushSize = wmax * 5;
-      red = swatch1[2][0];
-      green = swatch1[2][1];
-      blue = swatch1[2][2];
+      layer[2].fill(red, green, blue, maskDiff);
+      layer[2].rect(0,0,width,height);
+      red = swatch[colSwitch][6];
+      green = swatch[colSwitch][7];
+      blue = swatch[colSwitch][8];
       for (let i = 0; i < 40000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[2].image(pgResize[randomInt + 5], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+        layer[2].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
       }
     }
-  else if (currentGraphic === 15) {
+  else if (currentGraphic === 30) {
       dotLayer.clear();
       title = inter4title;
       layerState = 3;
@@ -490,15 +479,17 @@ breathLayer.clear();
       intermissionState = 1;
           makeDots();
       brushSize = wmax * 4;
-      red = swatch1[3][0];
-      green = swatch1[3][1];
-      blue = swatch1[3][2];
+      layer[3].fill(red, green, blue, maskDiff);
+      layer[3].rect(0,0,width,height);
+      red = swatch[colSwitch][9];
+      green = swatch[colSwitch][10];
+      blue = swatch[colSwitch][11];
       for (let i = 0; i < 30000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[3].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+        layer[3].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
       }
     }
-    else if (currentGraphic === 20) {
+    else if (currentGraphic === 40) {
       dotLayer.clear();
       title = inter5title;
       layerState = 4;
@@ -506,12 +497,14 @@ breathLayer.clear();
       intermissionState = 1;
           makeDots();
       brushSize = wmax * 3;
-      red = swatch1[4][0];
-      green = swatch1[4][1];
-      blue = swatch1[4][2];
+      layer[4].fill(red, green, blue, maskDiff);
+      layer[4].rect(0,0,width,height);
+      red = swatch[colSwitch][12];
+      green = swatch[colSwitch][13];
+      blue = swatch[colSwitch][14];
       for (let i = 0; i < 20000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[4].image(pgResize[randomInt + 15], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+        layer[4].image(pgResize[randomInt + 30], randWidth[i], randHeight[i], wmax*5, wmax*5); // replace with scalar
       }
     }
 
@@ -572,13 +565,19 @@ else{
     if (maskVer === 4){
       maskVer = 1;
     }
+    button3.remove();
     backdrop();
     stateChanger();
-    
 
+    colourSwitcher();
 
+  }
 
-
+  function colourSwitcher(){
+    colSwitch++;
+    if (colSwitch === 4){
+      colSwitch = 0;
+    }
   }
 
   function windowResized() {
