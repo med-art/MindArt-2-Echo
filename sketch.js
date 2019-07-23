@@ -371,10 +371,12 @@ image(breathLayer, 0, 0, width, height);
       noTint();
       if (currentGraphic === numOfGraphics - 2) {
         updateGraphics();
+          endState = 1;
         backdrop();
         blendMode(DARKEST);
         endText();
-        makeLandscape();
+
+        setTimeout(makeLandscape, 1000);
 
 
 
@@ -390,22 +392,11 @@ image(breathLayer, 0, 0, width, height);
   }
 
   function makeLandscape(){
-    for (let i = 0; i < 80000; i++) {
-      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-      layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-    }
-    for (let i = 0; i < 40000; i++) {
-      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-      layer[2].image(pgResize[randomInt + 5], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-    }
-    for (let i = 0; i < 30000; i++) {
-      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-      layer[3].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-    }
-    for (let i = 0; i < 20000; i++) {
-      randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-      layer[4].image(pgResize[randomInt + 15], randWidth[i], randHeight[i], 70, 70); // replace with scalar
-    }
+
+  backdrop();
+    blendMode(DARKEST);
+
+
     for (let i = 0; i < 20000; i++) {
       randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
       layer[5].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], 70, 70); // replace with scalar
@@ -422,7 +413,7 @@ image(breathLayer, 0, 0, width, height);
     layer[5].image(maskImg[maskVer][5], 0, 0, width, height);
     image(layer[5], 0, 0);
     randomCoord();
-    endState = 1;
+
   }
 
   function updateGraphics() {
@@ -470,6 +461,10 @@ breathLayer.clear();
       red = swatch1[1][0];
       green = swatch1[1][1];
       blue = swatch1[1][2];
+      for (let i = 0; i < 80000; i++) {
+        randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+        layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+      }
     }
     else if (currentGraphic === 10) {
       dotLayer.clear();
@@ -482,6 +477,10 @@ breathLayer.clear();
       red = swatch1[2][0];
       green = swatch1[2][1];
       blue = swatch1[2][2];
+      for (let i = 0; i < 40000; i++) {
+        randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+        layer[2].image(pgResize[randomInt + 5], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+      }
     }
   else if (currentGraphic === 15) {
       dotLayer.clear();
@@ -494,6 +493,10 @@ breathLayer.clear();
       red = swatch1[3][0];
       green = swatch1[3][1];
       blue = swatch1[3][2];
+      for (let i = 0; i < 30000; i++) {
+        randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+        layer[3].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+      }
     }
     else if (currentGraphic === 20) {
       dotLayer.clear();
@@ -506,6 +509,10 @@ breathLayer.clear();
       red = swatch1[4][0];
       green = swatch1[4][1];
       blue = swatch1[4][2];
+      for (let i = 0; i < 20000; i++) {
+        randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
+        layer[4].image(pgResize[randomInt + 15], randWidth[i], randHeight[i], 70, 70); // replace with scalar
+      }
     }
 
 else{
