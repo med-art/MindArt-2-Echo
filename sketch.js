@@ -413,15 +413,15 @@ image(breathLayer, 0, 0, width, height);
       layer[5].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], 70, 70); // replace with scalar
     }
 
-    layer[1].image(maskImg[maskVer][1], 0, 0);
+    layer[1].image(maskImg[maskVer][1], 0, 0, width, height);
     image(layer[1], 0, 0);
-    layer[2].image(maskImg[maskVer][2], 0, 0);
+    layer[2].image(maskImg[maskVer][2], 0, 0, width, height);
     image(layer[2], 0, 0);
-    layer[3].image(maskImg[maskVer][3], 0, 0);
+    layer[3].image(maskImg[maskVer][3], 0, 0, width, height);
     image(layer[3], 0, 0);
-    layer[4].image(maskImg[maskVer][4], 0, 0);
+    layer[4].image(maskImg[maskVer][4], 0, 0, width, height);
     image(layer[4], 0, 0);
-    layer[5].image(maskImg[maskVer][5], 0, 0);
+    layer[5].image(maskImg[maskVer][5], 0, 0, width, height);
     image(layer[5], 0, 0);
     randomCoord();
     endState = 1;
