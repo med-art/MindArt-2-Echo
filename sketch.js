@@ -173,6 +173,9 @@ let arrowDimen = [
     findLongEdge();
     textAlign(CENTER, CENTER);
 
+    writeTextUI();
+
+
 
   }
 
@@ -360,7 +363,6 @@ image(breathLayer, 0, 0, width, height);
         endText();
 
         setTimeout(makeLandscape, 3000);
-        writeTextUI();
 
 
 
