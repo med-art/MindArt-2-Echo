@@ -382,11 +382,11 @@ image(breathLayer, 0, 0, width, height);
 
   function createEnd(){
     restartAvailable = 1;
-    textSize(lmax*5);
-        fill(40, 40, 40);
+    textSize(lmax*3);
+        fill(40, 40, 55);
         textStyle(NORMAL);
-      
-        text("Touch to restart", wmax*80, hmax * 90, width, height);
+
+        text("Touch to restart", wmax*70, hmax * 90, width, height);
 
   }
 
@@ -513,7 +513,7 @@ breathLayer.clear();
       interTextCurrent = inter5text;
       intermissionState = 1;
           makeDots();
-      brushSize = wmax * 3;
+      brushSize = wmax * 4;
       layer[4].fill(red, green, blue, maskDiff);
       layer[4].rect(0,0,width,height);
       red = swatch[colSwitch][12];
