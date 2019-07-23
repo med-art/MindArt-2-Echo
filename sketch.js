@@ -32,32 +32,33 @@
   let arrow = [];
 
   let swatch1 = [
-    [188, 179, 164],
-    [131, 114, 104],
-    [95, 79, 66],
-    [57, 45, 33],
-    [37, 34, 29]
+    [223, 234, 166],
+    [117, 174, 67],
+    [173, 209, 57],
+    [20, 110, 56],
+    [29, 53, 27]
   ]; // ref all swatch docs in the assets folder for reference imagery
+
   let swatch2 = [
-    [16, 32, 13],
-    [34, 54, 44],
-    [34, 55, 68],
-    [35, 51, 81],
-    [40, 38, 91]
+    [172, 224, 186],
+    [114, 155, 123],
+    [67, 114, 95],
+    [152, 55, 24],
+    [20, 44, 31]
   ];
   let swatch3 = [
-    [252, 19, 11],
-    [290, 10, 23],
-    [32, 13, 45],
-    [34, 24, 56],
-    [30, 36, 76]
+    [231, 201, 139],
+    [174, 133, 79],
+    [127, 94, 59],
+    [55, 42, 26],
+    [34, 26, 23]
   ];
   let swatch4 = [
-    [249, 59, 18],
-    [240, 56, 35],
-    [140, 148, 169],
-    [280, 2, 72],
-    [12, 5, 79]
+    [229, 205, 176],
+    [176, 148, 110],
+    [103, 92, 83],
+    [30, 29, 33],
+    [11, 11, 14]
   ];
 
   let scalar = 0;
@@ -81,16 +82,16 @@
   let inter1text = "1) Slowly draw a line from one dot to the other while exhaling and inhaling (there will be prompts to help).\n You will do this 10 times to create your first landscape texture.";
 
   let inter2title = "";
-  let inter2text = "2) Now imagine a line in the wind and draw a line from one dot to the other while exhaling and inhaling (there will be prompts to help). \n You will do this 10 times to create your second landscape texture"
+  let inter2text = "2) Now imagine a line in the wind. \n Draw a line from one dot to the other while exhaling and inhaling (there will be prompts to help). \n You will do this 10 times to create your second landscape texture"
 
   let inter3title = "";
-  let inter3text = "3) This time imagine the wind has changed direction and draw a line from one dot to the other while exhaling and inhaling (there will be prompts to help). \n You will do this 10 times  to create your third landscape texture.";
+  let inter3text = "3) This time we will connect four dots. \n Remember to exhale and inhale as you draw. \n You will do this 10 times to create your 3rd landscape texture.";
 
   let inter4title = "";
-  let inter4text = "4) This time you have three dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 4'th landscape texture";
+  let inter4text = "4) This time you have three dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 4th landscape texture";
 
   let inter5title = "";
-  let inter5text = "5) For the 5 th step you have 5 dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 5'th  landscape texture";
+  let inter5text = "5) For the 5 th step you have 5 dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 5th  landscape texture";
 
   let confirmationText = "Congratulations this is your ‘Echo’ landscape";
 
@@ -105,7 +106,7 @@
   ] // dots are defined by X then Y coordinates. If 2 dots, then X,Y,X,Y, etc.
 
 let arrowDimen = [
-  [1, 55, 90],
+  [1, 55, 10],
   [2, 35, 90],
   [3, 45, 10, 4, 55, 90],
   [1, 110,110],
@@ -179,9 +180,9 @@ let arrowDimen = [
     pg = createGraphics(width, height); // only need one of these, to store current brush, later cleared.
 
     //resize layers // replace the stop with list length
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 4; i++) {
           for (let j = 1; j < 6; j++){
-    //  maskImg[i][j].resize(width, height); // brush loader IS THIS THE PROBLEM
+      maskImg[i][j].resize(width, height); // brush loader IS THIS THE PROBLEM
     }
   }
 
@@ -201,17 +202,17 @@ let arrowDimen = [
   }
 
   function makeDots() {
-    dotLayer.fill(180, 175, 190);
+    dotLayer.fill(80, 80, 200);
     dotLayer.noStroke();
     dotTempArray = dotDimen[layerState];
     for (let i = 0; i < dotDimen[layerState].length; i += 2) {
       dotLayer.circle(int(wmax * dotDimen[layerState][i]), int(hmax * dotDimen[layerState][i + 1]), wmax * 1.5);
     }
 
-dotLayer.image(arrow[arrowDimen[layerState][0]], int(wmax * arrowDimen[layerState][1]), int(hmax * arrowDimen[layerState][2]), wmax, wmax*2);
+dotLayer.image(arrow[arrowDimen[layerState][0]], int(wmax * arrowDimen[layerState][1]), int(hmax * arrowDimen[layerState][2]), wmax*2, wmax*4);
 
 if(arrowDimen[layerState].length > 3 ){
-  dotLayer.image(arrow[arrowDimen[layerState][3]], int(wmax * arrowDimen[layerState][4]), int(hmax * arrowDimen[layerState][5]), wmax, wmax*2);
+  dotLayer.image(arrow[arrowDimen[layerState][3]], int(wmax * arrowDimen[layerState][4]), int(hmax * arrowDimen[layerState][5]), wmax*2, wmax*4);
 
 }
 
@@ -271,11 +272,11 @@ if(arrowDimen[layerState].length > 3 ){
     breathLayer.textSize(wmax*2.5);
 
 if (breath === "exhale"){
-    breathLayer.text(breath, width-50, height / 1.9);
+    breathLayer.text(breath, width-wmax*20, height / 1.9);
 }
 
 else if (breath === "inhale"){
-    breathLayer.text(breath, width-50, height / 2.1);
+    breathLayer.text(breath, width-wmax*20, height / 2.1);
 }
 image(breathLayer, 0, 0, width, height);
 
@@ -322,7 +323,7 @@ image(breathLayer, 0, 0, width, height);
         backdrop();
         breathLayer.clear();
 
-      if (layerState <3){breathe("inhale");}
+      if (layerState <2){breathe("exhale");}
 
         intermissionState = 0;
         image(dotLayer, 0, 0, width, height);
@@ -510,7 +511,7 @@ breathLayer.clear();
     }
 
 else{
-      if (layerState <3){breathe("exhale");}
+      if (layerState <2){breathe("inhale");}
 }
 
     image(dotLayer, 0, 0, width, height);
@@ -542,10 +543,10 @@ else{
     colH3 = color(355, 87, 74);
 
     button3.style('background-color', colH3);
-    button3.style('font-size', '1.75vmax');
+    button3.style('font-size', '2.1vmax');
     button3.style('color', 'white');
     button3.style('border-radius', '0.5vmax')
-    button3.style('width', '12vmax')
+    button3.style('width', '14vmax')
     button3.mousePressed(restart);
   }
 
