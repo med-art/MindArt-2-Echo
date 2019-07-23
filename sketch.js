@@ -294,8 +294,7 @@ image(breathLayer, 0, 0, width, height);
       introState = 0;
       audio.loop();
 
-    } else if {
-      if (timer > 999 && endState === 0) {
+    } else if (timer > 999 && endState === 0) {
 
         backdrop();
         breathLayer.clear();
@@ -305,7 +304,7 @@ image(breathLayer, 0, 0, width, height);
         intermissionState = 0;
         image(dotLayer, 0, 0, width, height);
       }
-    }
+    
 
     return false;
   }
