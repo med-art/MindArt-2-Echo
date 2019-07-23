@@ -574,8 +574,7 @@ else{
     }
     backdrop();
     stateChanger();
-    swatchSwitch();
-
+    
 
 
 
