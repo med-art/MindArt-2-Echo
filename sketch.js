@@ -360,7 +360,7 @@ image(breathLayer, 0, 0, width, height);
         endText();
 
         setTimeout(makeLandscape, 3000);
-        setTimeout(writeTextUI, 6000);
+        writeTextUI();
 
 
 
