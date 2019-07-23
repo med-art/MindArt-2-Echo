@@ -93,7 +93,7 @@
   let inter5title = "";
   let inter5text = "5) For the 5 th step you have 5 dots to draw lines to. You can go in any direction but remember to inhale and exhale as you draw. \n You will do this 10 times to create your 5th  landscape texture";
 
-  let confirmationText = "Congratulations this is your ‘Echo’ landscape";
+  let confirmationText = "Congratulations, this is your ‘Echo’ landscape";
 
   let wmax, hmax;
 
@@ -219,10 +219,10 @@ if(arrowDimen[layerState].length > 3 ){
   function endText(){
 
 
-    textSize(wmax*2.5);
-        fill(50, 50, 50, 0.01);
+    textSize(wmax*2);
+        fill(50, 50, 50, 1);
         textStyle(NORMAL);
-        text(confirmationText, width / 2, hmax * 55, width * 0.8, height);
+        text(confirmationText, width / 2, hmax * 5, width * 0.8, height);
   }
 
 
@@ -249,9 +249,9 @@ if(arrowDimen[layerState].length > 3 ){
       textSize(wmax*2.5);
       fill(40, 35, 30, 0.01);
       textStyle(BOLD);
-      text(title, windowWidth / 2, height / 2.5, width * 0.5, height);
+      text(title, windowWidth / 2, hmax*20, width * 0.5, height);
       textStyle(NORMAL);
-      text(interTextCurrent, width / 2, height / 2, width * 0.8, height);
+      text(interTextCurrent, width / 2, hmax*60, width * 0.8, height);
 
 
     }
@@ -375,6 +375,8 @@ image(breathLayer, 0, 0, width, height);
         blendMode(DARKEST);
         endText();
         makeLandscape();
+
+
 
 
       } else {
