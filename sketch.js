@@ -182,7 +182,7 @@ let arrowDimen = [
     //resize layers // replace the stop with list length
     for (let i = 1; i < 4; i++) {
           for (let j = 1; j < 6; j++){
-      maskImg[i][j].resize(width, height); // brush loader IS THIS THE PROBLEM
+    //  maskImg[i][j].resize(width, height); // brush loader IS THIS THE PROBLEM
     }
   }
 
