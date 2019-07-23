@@ -327,7 +327,7 @@ image(breathLayer, 0, 0, width, height);
     return false;
   }
 
-  function mouseDragged() {
+  function touchMoved() {
 
     if (timer > 999 && endState === 0) {
 
