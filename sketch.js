@@ -304,7 +304,10 @@ image(breathLayer, 0, 0, width, height);
         intermissionState = 0;
         image(dotLayer, 0, 0, width, height);
       }
-    
+
+    else if (endState === 1) {
+      restart();
+    }
 
     return false;
   }
