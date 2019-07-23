@@ -467,7 +467,7 @@ breathLayer.clear();
       blue = swatch[colSwitch][5];
       for (let i = 0; i < 80000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], lmax*7, lmax*7); // replace with scalar
+        layer[1].image(pgResize[randomInt], randWidth[i], randHeight[i], lmax*4, lmax*4); // replace with scalar
       }
     }
     else if (currentGraphic === 20) {
@@ -485,7 +485,7 @@ breathLayer.clear();
       blue = swatch[colSwitch][8];
       for (let i = 0; i < 40000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[2].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], lmax*7, lmax*7); // replace with scalar
+        layer[2].image(pgResize[randomInt + 10], randWidth[i], randHeight[i], lmax*5, lmax*5); // replace with scalar
       }
     }
   else if (currentGraphic === 30) {
@@ -503,7 +503,7 @@ breathLayer.clear();
       blue = swatch[colSwitch][11];
       for (let i = 0; i < 30000; i++) {
         randomInt = int(random(0, (numOfGraphics / numOfLayers) - 1)); // ((25 / 5)*1)-1
-        layer[3].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], lmax*7, lmax*7); // replace with scalar
+        layer[3].image(pgResize[randomInt + 20], randWidth[i], randHeight[i], lmax*6, lmax*6); // replace with scalar
       }
     }
     else if (currentGraphic === 40) {
