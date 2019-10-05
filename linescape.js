@@ -357,7 +357,7 @@ function colorAlpha(aColor, alpha) {
 
 function eraser(_x, _y, _px, _py) {
   paint.strokeWeight(80);
-  paint.stroke(colorAlpha(colArray[(colShift * 4) + 1], 0.1));
+  paint.stroke(colorAlpha(colArray[(colShift * 4) + 1], 0.5));
   paint.line(_x, _y, _px, _py);
 }
 
