@@ -26,7 +26,7 @@ let swatch1, swatch2, swatch3, swatch4;
 
 let eraseBool = 0;
 
-let vW;
+let vW, vMin, vMax;
 
 let appCol = "#244c6f";
 
@@ -54,7 +54,9 @@ let tileNum = 1;
 function setup() {
 
   createCanvas(windowWidth, windowHeight);
-  vW = width / 100;
+
+  calcDimensions();
+
 
   background(51);
   backdrop = createGraphics(windowWidth, windowHeight);
@@ -67,29 +69,39 @@ function setup() {
   backdrop.noStroke();
   paint.noStroke();
 
-
-
-
   makeSwatch();
   newGrid();
 
-
 }
 
+
+function calcDimensions(){
+    vW = width / 100;
+
+    if (width > height){
+      vMax = width / 100;
+      vMin = height / 100;
+    }
+
+    else {
+      vMax = height / 100;
+      vMin = width / 100;
+    }
+}
 
 function makeSwatch() {
 
 
   button = createImg('assets/eraseOff.png');
-  button.position(1.5 * vW, height - (10 * vW));
-  button.size(10 * vW, 10 * vW);
+  button.position(1.5 * vMax, height - (10 * vMax));
+  button.size(10 * vMax, 10 * vMax);
   button.mousePressed(invertButton);
 
 
 
   swatch1 = createButton("");
-  swatch1.position(11 * vW, height - (8.1 * vW));
-  swatch1.size(5 * vW, 6 * vW);
+  swatch1.position(11 * vMax, height - (8.1 * vMax));
+  swatch1.size(5 * vMax, 6 * vMax);
   swatch1.style("background-color", "White");
   swatch1.class("box");
   swatch1.mousePressed(function() {
@@ -97,8 +109,8 @@ function makeSwatch() {
   });
 
   swatch2 = createButton("");
-  swatch2.position(16 * vW, height - (8.1 * vW));
-  swatch2.size(5 * vW, 6 * vW);
+  swatch2.position(16 * vMax, height - (8.1 * vMax));
+  swatch2.size(5 * vMax, 6 * vMax);
   swatch2.style("background-color", "Black");
   swatch2.class("box");
   swatch2.mousePressed(function() {
@@ -106,8 +118,8 @@ function makeSwatch() {
   });
 
   swatch3 = createButton("");
-  swatch3.position(21 * vW, height - (8.1 * vW));
-  swatch3.size(5 * vW, 6 * vW);
+  swatch3.position(21 * vMax, height - (8.1 * vMax));
+  swatch3.size(5 * vMax, 6 * vMax);
   swatch3.style('background-color', colArray[(colShift * 4) + 0]);
   swatch3.class("box");
   swatch3.mousePressed(function() {
@@ -115,8 +127,8 @@ function makeSwatch() {
   });
 
   swatch4 = createButton("");
-  swatch4.position(26 * vW, height - (8.1 * vW));
-  swatch4.size(5 * vW, 6 * vW);
+  swatch4.position(26 * vMax, height - (8.1 * vMax));
+  swatch4.size(5 * vMax, 6 * vMax);
   swatch4.style("background-color", colArray[(colShift * 4) + 3]);
   swatch4.class("box");
   swatch4.mousePressed(function() {
@@ -127,8 +139,8 @@ function makeSwatch() {
 
 
   selColour = createImg('assets/colSelected.png');
-  selColour.position(11 * vW, height - (10 * vW));
-  selColour.size(5 * vW, 10 * vW);
+  selColour.position(11 * vMax, height - (10 * vMax));
+  selColour.size(5 * vMax, 10 * vMax);
   selColour.mousePressed();
 
   saveNext();
