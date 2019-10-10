@@ -93,15 +93,15 @@ function makeSwatch() {
 
   button = createImg('assets/eraseOn.png');
   button = createImg('assets/eraseOff.png');
-  button.position(1.5 * vMax, height - (10 * vMax));
-  button.size(10 * vMax, 10 * vMax);
+  button.position(1.5 * vMax, height - (14 * vMax));
+  button.size(14 * vMax, 14 * vMax);
   button.mousePressed(invertButton);
 
 
 
   swatch1 = createButton("");
-  swatch1.position(11 * vMax, height - (8.1 * vMax));
-  swatch1.size(5 * vMax, 6 * vMax);
+  swatch1.position(15 * vMax, height - (11.5 * vMax));
+  swatch1.size(6 * vMax, 9 * vMax);
   swatch1.style("background-color", "White");
   swatch1.class("box");
   swatch1.mousePressed(function() {
@@ -109,8 +109,8 @@ function makeSwatch() {
   });
 
   swatch2 = createButton("");
-  swatch2.position(16 * vMax, height - (8.1 * vMax));
-  swatch2.size(5 * vMax, 6 * vMax);
+  swatch2.position(21 * vMax, height - (11.5 * vMax));
+  swatch2.size(6 * vMax, 9 * vMax);
   swatch2.style("background-color", "Black");
   swatch2.class("box");
   swatch2.mousePressed(function() {
@@ -118,8 +118,8 @@ function makeSwatch() {
   });
 
   swatch3 = createButton("");
-  swatch3.position(21 * vMax, height - (8.1 * vMax));
-  swatch3.size(5 * vMax, 6 * vMax);
+  swatch3.position(27 * vMax, height - (11.5 * vMax));
+  swatch3.size(6 * vMax, 9 * vMax);
   swatch3.style('background-color', colArray[(colShift * 4) + 0]);
   swatch3.class("box");
   swatch3.mousePressed(function() {
@@ -127,8 +127,8 @@ function makeSwatch() {
   });
 
   swatch4 = createButton("");
-  swatch4.position(26 * vMax, height - (8.1 * vMax));
-  swatch4.size(5 * vMax, 6 * vMax);
+  swatch4.position(33 * vMax, height - (11.5 * vMax));
+  swatch4.size(6 * vMax, 9 * vMax);
   swatch4.style("background-color", colArray[(colShift * 4) + 3]);
   swatch4.class("box");
   swatch4.mousePressed(function() {
@@ -139,8 +139,8 @@ function makeSwatch() {
 
 
   selColour = createImg('assets/colSelected.png');
-  selColour.position(11 * vMax, height - (10 * vMax));
-  selColour.size(5 * vMax, 10 * vMax);
+  selColour.position(15 * vMax, height - (13.9 * vMax));
+  selColour.size(6 * vMax, 13.2 * vMax);
   selColour.mousePressed();
 
   saveNext();
@@ -153,12 +153,16 @@ function saveNext(){
 
   newButton = createButton("Next")
   newButton.class("select");
-  newButton.position(width-(14 * vMax), height - (9 * vMax));
+  newButton.position(width-(18 * vMax), height - (12.5 * vMax));
+  newButton.style('font-size', '2.6vmax');
+  newButton.style('height', '4.5vmax');
   newButton.mousePressed(gridVStexture);
 
   saveButton = createButton("Save")
   saveButton.class("select");
-  saveButton.position(width-(14 * vMax), height - (5 * vMax));
+  saveButton.style('font-size', '2.6vmax');
+  saveButton.style('height', '4.5vmax');
+  saveButton.position(width-(18 * vMax), height - (6.5 * vMax));
   saveButton.mousePressed(saveImg);
 }
 
@@ -174,9 +178,11 @@ function changeBrush(brushSel, col, order) {
 
   selColour.remove();
   selColour = createImg('assets/colSelected.png');
-  selColour.position((11 + (order * 5)) * vMax, height - (10 * vMax));
-  selColour.size(5 * vMax, 10 * vMax);
+  selColour.position((15 + (order * 6)) * vMax, height - (13.9 * vMax));
+  selColour.size(6 * vMax, 13.2 * vMax);
   selColour.mousePressed();
+
+
 
 
 }
@@ -188,20 +194,22 @@ function invertButton() {
 
 
 
+
+
   if (eraseBool === 0) {
     selColour.remove();
     button.remove();
     button = createImg('assets/eraseOn.png')
-    button.position(1.5 * vMax, height - (10 * vMax));
-    button.size(10 * vMax, 10 * vMax);
+    button.position(1.5 * vMax, height - (14 * vMax));
+    button.size(14 * vMax, 14 * vMax);
     button.mousePressed(invertButton);
     eraseBool = 1;
   } else {
     selColour.remove();
     button.remove();
     button = createImg('assets/eraseOff.png')
-    button.position(1.5 * vMax, height - (10 * vMax));
-    button.size(10 * vMax, 10 * vMax);
+    button.position(1.5 * vMax, height - (14 * vMax));
+    button.size(14 * vMax, 14 * vMax);
     button.mousePressed(invertButton);
     eraseBool = 0;
   }
