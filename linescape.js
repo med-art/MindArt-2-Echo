@@ -153,12 +153,12 @@ function saveNext(){
 
   newButton = createButton("New Drawing")
   newButton.class("select");
-  newButton.position(86 * vMax, height - (9 * vMax));
+  newButton.position(width-(14 * vMax), height - (9 * vMax));
   newButton.mousePressed(gridVStexture);
 
   saveButton = createButton("Save")
   saveButton.class("select");
-  saveButton.position(86 * vMax, height - (5 * vMax));
+  saveButton.position(width-(14 * vMax), height - (5 * vMax));
   saveButton.mousePressed(saveImg);
 }
 
