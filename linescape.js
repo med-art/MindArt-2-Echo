@@ -1,13 +1,7 @@
-/* TODO
-do a light to dark convertor, dark to light, changing blendMode, colour choice and use of black vs white brush.
-*/
-
-// 7 stages
-// palettes change every brush
-//
-
-//
-
+// TODO:
+// add save functionality
+// add screen rotation functionality
+// map the scale value to max out at 1x1
 
 let colArray = ["#e02027", "#d64389", "#943390", "#0b52a0", "#499ed7", "#16ac84", "#0b7c40", "#135741", "#f8e400", "#f0b51d", "#f78f26", "#ed6623", "#ffffff", "#ddcba5", "#b05938", "#050606"];
 //red, magenta, purple, darkblue, lightblue, bluegreen, green, darkgreen, yellow, mustard, wax, orange, white, sand, brown, black
@@ -30,7 +24,7 @@ let vW, vMin, vMax;
 
 let appCol = "#244c6f";
 
-let horizCount = -2,
+let horizCount = 1,
   vertCount = 3;
 
 let brushSelected = 1;
@@ -41,7 +35,7 @@ let selColour;
 
 let colShift = 0;
 
-let gridLineSize = 20;
+let gridLineSize = 12;
 
 let stage = 0;
 
@@ -92,6 +86,7 @@ function calcDimensions(){
 function makeSwatch() {
 
   button = createImg('assets/eraseOn.png');
+  button.remove();
   button = createImg('assets/eraseOff.png');
   button.position(1.5 * vMax, height - (14 * vMax));
   button.size(14 * vMax, 14 * vMax);
@@ -153,7 +148,7 @@ function saveNext(){
 
   newButton = createButton("Next")
   newButton.class("select");
-  newButton.position(width-(18 * vMax), height - (12.5 * vMax));
+  newButton.position(width-(15 * vMax), height - (12.5 * vMax));
   newButton.style('font-size', '2.6vmax');
   newButton.style('height', '4.5vmax');
   newButton.mousePressed(gridVStexture);
@@ -162,7 +157,7 @@ function saveNext(){
   saveButton.class("select");
   saveButton.style('font-size', '2.6vmax');
   saveButton.style('height', '4.5vmax');
-  saveButton.position(width-(18 * vMax), height - (6.5 * vMax));
+  saveButton.position(width-(15 * vMax), height - (6.5 * vMax));
   saveButton.mousePressed(saveImg);
 }
 
@@ -255,7 +250,7 @@ function makeSlider(_mouseX){
     sliderImg.rectMode(RADIUS);
     sliderImg.fill(appCol);
     sliderImg.noStroke();
-    sliderImg.rect(_mouseX, height-(6*vMax), 1*vMax, 5*vMax);
+    sliderImg.rect(constrain(_mouseX, width*0.04, width*0.82), height-(6*vMax), 1*vMax, 5*vMax);
 
 
 }
@@ -266,9 +261,9 @@ function newGrid() {
 
   if (stage === 8) {
     vertCount = 3;
-    horizCount = -2;
+    horizCount = 2;
     stage = 0;
-    gridLineSize = 10;
+    gridLineSize = 12;
   }
 
   fillCol = 5;
@@ -276,7 +271,7 @@ function newGrid() {
 
   vertCount += 2;
   horizCount += 1;
-  gridLineSize -= 3;
+  gridLineSize -= 2;
   colShift++;
   if (colShift === 4) {
     colShift = 0;
@@ -386,20 +381,23 @@ function eraser(_x, _y, _px, _py) {
 function brushIt(_x, _y, pX, pY) {
 
   if (brushSelected === 0) {
-    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 3, 5)); // for line work
+    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 1, 4)); // for line work
     paint.stroke(colorAlpha(colSelected, .9));
     paint.strokeCap(SQUARE);
     paint.line(_x, _y, pX, pY);
 
   } else if (brushSelected === 1) {
-    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 5, 12)); // for line work
-    paint.stroke(colorAlpha(colSelected, .6));
-    paint.strokeCap(SQUARE);
+    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 4, 20)); // for line work
+    paint.stroke(colorAlpha(colSelected, .8));
+    paint.strokeCap(PROJECT);
     paint.line(_x, _y, pX, pY);
 
+
+
+
   } else if (brushSelected === 2) {
-    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 2, 3)); // for line work
-    paint.stroke(colorAlpha(colSelected, 2));
+    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 0.1, 2.2)); // for line work
+    paint.stroke(colorAlpha(colSelected, 0.7));
     for (i = 0; i < 30; i++) {
       let randX = randomGaussian(-15, 15);
       let randY = randomGaussian(-15, 15);
@@ -428,12 +426,12 @@ function brushIt(_x, _y, pX, pY) {
   } else if (brushSelected === 4) {
     paint.strokeWeight(abs(random(4, 20)));
     for (i = 0; i < 30; i++) {
-      paint.stroke(colorAlpha(colSelected, 3));
+      paint.stroke(colorAlpha(colSelected, 0.8));
       paint.point(_x + randomGaussian(-10, 10), _y + randomGaussian(-10, 10));
     }
 
   } else if (brushSelected === 5) {
-    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 14, 18)); // for line work
+    paint.strokeWeight(constrain(abs((_y + _x) - (pX + pY)), 10, 25)); // for line work
     paint.stroke(colorAlpha(colSelected, .7));
     paint.strokeCap(PROJECT);
     paint.line(_x, _y, pX, pY);
@@ -452,8 +450,25 @@ function brushIt(_x, _y, pX, pY) {
 }
 
 function saveImg() {
-  image(backdrop, 0, 0, width, height);
-  image(paint, 0, 0, width, height);
-  image(foreground, 0, 0, width, height);
-  save('linescape' + month() + day() + hour() + second() + '.jpg');
+
+    blendMode(BLEND);
+    if (gridVStextureBool){
+
+      for (let i = 0; i < tileNum; i++){
+        for (let j = 0; j < tileNum; j++){
+          image(backdrop, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
+          image(paint, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
+          image(foreground, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
+        }
+      }
+
+
+
+    }
+    else{
+      image(backdrop, 0, 0, width, height);
+      image(paint, 0, 0, width, height);
+      image(foreground, 0, 0, width, height);
+    }
+    save('linescape' + month() + day() + hour() + second() + '.jpg');
 }
