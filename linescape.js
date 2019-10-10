@@ -153,12 +153,12 @@ function saveNext(){
 
   newButton = createButton("New Drawing")
   newButton.class("select");
-  newButton.position(86 * vW, height - (9 * vW));
+  newButton.position(86 * vMax, height - (9 * vMax));
   newButton.mousePressed(gridVStexture);
 
   saveButton = createButton("Save")
   saveButton.class("select");
-  saveButton.position(86 * vW, height - (5 * vW));
+  saveButton.position(86 * vMax, height - (5 * vMax));
   saveButton.mousePressed(saveImg);
 }
 
@@ -174,8 +174,8 @@ function changeBrush(brushSel, col, order) {
 
   selColour.remove();
   selColour = createImg('assets/colSelected.png');
-  selColour.position((11 + (order * 5)) * vW, height - (10 * vW));
-  selColour.size(5 * vW, 10 * vW);
+  selColour.position((11 + (order * 5)) * vMax, height - (10 * vMax));
+  selColour.size(5 * vMax, 10 * vMax);
   selColour.mousePressed();
 
 
@@ -192,16 +192,16 @@ function invertButton() {
     selColour.remove();
     button.remove();
     button = createImg('assets/eraseOn.png')
-    button.position(1.5 * vW, height - (10 * vW));
-    button.size(10 * vW, 10 * vW);
+    button.position(1.5 * vMax, height - (10 * vMax));
+    button.size(10 * vMax, 10 * vMax);
     button.mousePressed(invertButton);
     eraseBool = 1;
   } else {
     selColour.remove();
     button.remove();
     button = createImg('assets/eraseOff.png')
-    button.position(1.5 * vW, height - (10 * vW));
-    button.size(10 * vW, 10 * vW);
+    button.position(1.5 * vMax, height - (10 * vMax));
+    button.size(10 * vMax, 10 * vMax);
     button.mousePressed(invertButton);
     eraseBool = 0;
   }
@@ -339,11 +339,11 @@ if (gridVStextureBool){
   sliderImg.clear();
   sliderImg.stroke(255);
   sliderImg.strokeWeight(5);
-  sliderImg.line(50, height-(6*vW), width-(16*vW), height-(6*vW));
+  sliderImg.line(50, height-(6*vMax), width-(16*vMax), height-(6*vMax));
   sliderImg.rectMode(RADIUS);
   sliderImg.fill(appCol);
   sliderImg.noStroke();
-  sliderImg.rect(mouseX, height-(6*vW), 1*vW, 5*vW);
+  sliderImg.rect(mouseX, height-(6*vMax), 1*vMax, 5*vMax);
 
 
 }
