@@ -91,7 +91,7 @@ function calcDimensions(){
 
 function makeSwatch() {
 
-
+  button = createImg('assets/eraseOn.png');
   button = createImg('assets/eraseOff.png');
   button.position(1.5 * vMax, height - (10 * vMax));
   button.size(10 * vMax, 10 * vMax);
@@ -151,7 +151,7 @@ function makeSwatch() {
 
 function saveNext(){
 
-  newButton = createButton("New Drawing")
+  newButton = createButton("Next")
   newButton.class("select");
   newButton.position(width-(14 * vMax), height - (9 * vMax));
   newButton.mousePressed(gridVStexture);
@@ -216,8 +216,7 @@ function removeSwatch() {
   swatch2.remove();
   swatch3.remove();
   swatch4.remove();
-  newButton.remove();
-  saveButton.remove();
+
   selColour.remove();
 }
 
@@ -228,16 +227,27 @@ gridVStextureBool = !gridVStextureBool;
 
 if (gridVStextureBool){
   removeSwatch();
-  makeSlider();
-  saveNext();
+  makeSlider(width/2);
+  newButton.html("Next");
 }
 else {
   newGrid();
+  newButton.html("Next");
 }
 
 }
 
-function makeSlider(){
+function makeSlider(_mouseX){
+
+
+    sliderImg.clear();
+    sliderImg.stroke(255);
+    sliderImg.strokeWeight(5);
+    sliderImg.line(50, height-(6*vMax), width-(16*vMax), height-(6*vMax));
+    sliderImg.rectMode(RADIUS);
+    sliderImg.fill(appCol);
+    sliderImg.noStroke();
+    sliderImg.rect(_mouseX, height-(6*vMax), 1*vMax, 5*vMax);
 
 
 }
@@ -250,14 +260,14 @@ function newGrid() {
     vertCount = 3;
     horizCount = -2;
     stage = 0;
-    gridLineSize = 20;
+    gridLineSize = 10;
   }
 
   fillCol = 5;
   paintCol = 0;
 
-  vertCount += 7;
-  horizCount += 4;
+  vertCount += 2;
+  horizCount += 1;
   gridLineSize -= 3;
   colShift++;
   if (colShift === 4) {
@@ -334,17 +344,9 @@ function touchStarted() {
 function touchMoved() {
 
 if (gridVStextureBool){
-  tileNum = ((width/mouseX));
+  tileNum = constrain(((width/(mouseX+20))),1,20);
 
-  sliderImg.clear();
-  sliderImg.stroke(255);
-  sliderImg.strokeWeight(5);
-  sliderImg.line(50, height-(6*vMax), width-(16*vMax), height-(6*vMax));
-  sliderImg.rectMode(RADIUS);
-  sliderImg.fill(appCol);
-  sliderImg.noStroke();
-  sliderImg.rect(mouseX, height-(6*vMax), 1*vMax, 5*vMax);
-
+makeSlider(winMouseX);
 
 }
 
