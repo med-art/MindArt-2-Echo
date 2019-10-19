@@ -1,5 +1,4 @@
 // TODO:
-// add save functionality
 // add screen rotation functionality
 // map the scale value to max out at 1x1
 
@@ -27,6 +26,8 @@ let appCol = "#244c6f";
 let horizCount = 1,
   vertCount = 3;
 
+  let pixelCount
+
 let brushSelected = 1;
 let colSelected = "#ffffff";
 let colArrayNum = 8;
@@ -47,19 +48,19 @@ let tileNum = 1;
 
 function setup() {
 
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth - 6, windowHeight - 6);
 
   calcDimensions();
 
 
   background(51);
-  backdrop = createGraphics(windowWidth, windowHeight);
+  backdrop = createGraphics(width, height);
   backdrop.colorMode(RGB, 255, 255, 255, 1000);
-  paint = createGraphics(windowWidth, windowHeight);
+  paint = createGraphics(width, height);
   paint.colorMode(RGB, 255, 255, 255, 1000);
-  foreground = createGraphics(windowWidth, windowHeight);
+  foreground = createGraphics(width, height);
   foreground.colorMode(RGB, 255, 255, 255, 1000);
-  sliderImg = createGraphics(windowWidth, windowHeight);
+  sliderImg = createGraphics(width, height);
   backdrop.noStroke();
   paint.noStroke();
 
@@ -69,18 +70,16 @@ function setup() {
 }
 
 
-function calcDimensions(){
-    vW = width / 100;
+function calcDimensions() {
+  vW = width / 100;
 
-    if (width > height){
-      vMax = width / 100;
-      vMin = height / 100;
-    }
-
-    else {
-      vMax = height / 100;
-      vMin = width / 100;
-    }
+  if (width > height) {
+    vMax = width / 100;
+    vMin = height / 100;
+  } else {
+    vMax = height / 100;
+    vMin = width / 100;
+  }
 }
 
 function makeSwatch() {
@@ -144,11 +143,11 @@ function makeSwatch() {
 
 }
 
-function saveNext(){
+function saveNext() {
 
   newButton = createButton("Next")
   newButton.class("select");
-  newButton.position(width-(15 * vMax), height - (12.5 * vMax));
+  newButton.position(width - (15 * vMax), height - (12.5 * vMax));
   newButton.style('font-size', '2.6vmax');
   newButton.style('height', '4.5vmax');
   newButton.mousePressed(gridVStexture);
@@ -157,7 +156,7 @@ function saveNext(){
   saveButton.class("select");
   saveButton.style('font-size', '2.6vmax');
   saveButton.style('height', '4.5vmax');
-  saveButton.position(width-(15 * vMax), height - (6.5 * vMax));
+  saveButton.position(width - (15 * vMax), height - (6.5 * vMax));
   saveButton.mousePressed(saveImg);
 }
 
@@ -219,38 +218,36 @@ function removeSwatch() {
   swatch2.remove();
   swatch3.remove();
   swatch4.remove();
-
   selColour.remove();
 }
 
-function gridVStexture(){
+function gridVStexture() {
 
-gridVStextureBool = !gridVStextureBool;
+  gridVStextureBool = !gridVStextureBool;
 
 
-if (gridVStextureBool){
-  removeSwatch();
-  makeSlider(width/2);
-  newButton.html("Next");
+  if (gridVStextureBool) {
+    removeSwatch();
+    makeSlider(width / 2);
+    newButton.html("Next");
+  } else {
+    newGrid();
+    newButton.html("Next");
+  }
+
 }
-else {
-  newGrid();
-  newButton.html("Next");
-}
 
-}
-
-function makeSlider(_mouseX){
+function makeSlider(_mouseX) {
 
 
-    sliderImg.clear();
-    sliderImg.stroke(255);
-    sliderImg.strokeWeight(5);
-    sliderImg.line(50, height-(6*vMax), width-(16*vMax), height-(6*vMax));
-    sliderImg.rectMode(RADIUS);
-    sliderImg.fill(appCol);
-    sliderImg.noStroke();
-    sliderImg.rect(constrain(_mouseX, width*0.04, width*0.82), height-(6*vMax), 1*vMax, 5*vMax);
+  sliderImg.clear();
+  sliderImg.stroke(255);
+  sliderImg.strokeWeight(5);
+  sliderImg.line(50, height - (6 * vMax), width - (16 * vMax), height - (6 * vMax));
+  sliderImg.rectMode(RADIUS);
+  sliderImg.fill(appCol);
+  sliderImg.noStroke();
+  sliderImg.rect(constrain(_mouseX, width * 0.04, width * 0.82), height - (6 * vMax), 1 * vMax, 5 * vMax);
 
 
 }
@@ -292,44 +289,39 @@ function newGrid() {
 
   paint.clear();
   paint.fill(colArray[(colShift * 4) + 1]);
-  paint.rect(-10, -10, width+20, height+20); // reason for extra width = strange paint layer on boundary.
+  paint.rect(-10, -10, width + 20, height + 20); // reason for extra width = strange paint layer on boundary.
 
   foreground.clear();
   foreground.stroke(colArray[(colShift * 4) + 1]);
   foreground.strokeWeight(gridLineSize * 2);
 
   for (let i = 0; i < vertCount; i++) {
-  foreground.line((width / vertCount) * i, 0, (width / vertCount) * i, height);
+    foreground.line((width / vertCount) * i, 0, (width / vertCount) * i, height);
   }
 
   for (let i = 0; i < horizCount; i++) {
-  foreground.line(0, (height / horizCount) * i, width, (height / horizCount) * i);
+    foreground.line(0, (height / horizCount) * i, width, (height / horizCount) * i);
   }
-
-
-
-
 }
 
 function draw() {
 
-// none of this needs to be in draw - move to a static function.
+  // none of this needs to be in draw - move to a static function.
 
   blendMode(BLEND);
-  if (gridVStextureBool){
+  if (gridVStextureBool) {
 
-    for (let i = 0; i < tileNum; i++){
-      for (let j = 0; j < tileNum; j++){
-        image(backdrop, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
-        image(paint, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
-        image(foreground, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
+    for (let i = 0; i < tileNum; i++) {
+      for (let j = 0; j < tileNum; j++) {
+        image(backdrop, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+        image(paint, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+        image(foreground, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
       }
     }
 
-  image(sliderImg, 0, 0, width, height);
+    image(sliderImg, 0, 0, width, height);
 
-  }
-  else{
+  } else {
     image(backdrop, 0, 0, width, height);
     image(paint, 0, 0, width, height);
     image(foreground, 0, 0, width, height);
@@ -346,20 +338,18 @@ function touchStarted() {
 
 function touchMoved() {
 
-if (gridVStextureBool){
-  tileNum = constrain(((width/(mouseX+20))),1,20);
+  if (gridVStextureBool) {
+    tileNum = constrain(((width / (mouseX + 20))), 1, 20);
 
-makeSlider(winMouseX);
+    makeSlider(winMouseX);
 
-}
-
-else{
-  if (eraseBool === 0) {
-    brushIt(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
   } else {
-    eraser(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+    if (eraseBool === 0) {
+      brushIt(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+    } else {
+      eraser(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+    }
   }
-}
 
 
 
@@ -451,24 +441,33 @@ function brushIt(_x, _y, pX, pY) {
 
 function saveImg() {
 
-    blendMode(BLEND);
-    if (gridVStextureBool){
+  blendMode(BLEND);
+  if (gridVStextureBool) {
 
-      for (let i = 0; i < tileNum; i++){
-        for (let j = 0; j < tileNum; j++){
-          image(backdrop, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
-          image(paint, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
-          image(foreground, (width/tileNum)*i, (height/tileNum)*j, width/tileNum, height/tileNum);
-        }
+    for (let i = 0; i < tileNum; i++) {
+      for (let j = 0; j < tileNum; j++) {
+        image(backdrop, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+        image(paint, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+        image(foreground, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
       }
-
-
-
     }
-    else{
-      image(backdrop, 0, 0, width, height);
-      image(paint, 0, 0, width, height);
-      image(foreground, 0, 0, width, height);
-    }
-    save('linescape' + month() + day() + hour() + second() + '.jpg');
+
+
+
+  } else {
+    image(backdrop, 0, 0, width, height);
+    image(paint, 0, 0, width, height);
+    image(foreground, 0, 0, width, height);
+  }
+  save('linescape' + month() + day() + hour() + second() + '.jpg');
+}
+
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  newButton.remove();
+  saveButton.remove();
+  calcDimensions();
+  removeSwatch();
+  makeSwatch();
 }

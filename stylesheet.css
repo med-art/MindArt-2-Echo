@@ -2,6 +2,7 @@
   height: 100%;
   overscroll-behavior: none;
   position: fixed;
+  overflow: hidden;
 }
 
 .loadingclass {
