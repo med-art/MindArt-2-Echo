@@ -95,7 +95,7 @@ function makeSwatch() {
 
   swatch1 = createButton("");
   swatch1.position(15 * vMax, height - (11.5 * vMax));
-  swatch1.size(6 * vMax, 9 * vMax);
+  swatch1.size(8 * vMax, 9 * vMax);
   swatch1.style("background-color", "White");
   swatch1.class("box");
   swatch1.mousePressed(function() {
@@ -103,8 +103,8 @@ function makeSwatch() {
   });
 
   swatch2 = createButton("");
-  swatch2.position(21 * vMax, height - (11.5 * vMax));
-  swatch2.size(6 * vMax, 9 * vMax);
+  swatch2.position(23 * vMax, height - (11.5 * vMax));
+  swatch2.size(8 * vMax, 9 * vMax);
   swatch2.style("background-color", "Black");
   swatch2.class("box");
   swatch2.mousePressed(function() {
@@ -112,8 +112,8 @@ function makeSwatch() {
   });
 
   swatch3 = createButton("");
-  swatch3.position(27 * vMax, height - (11.5 * vMax));
-  swatch3.size(6 * vMax, 9 * vMax);
+  swatch3.position(31 * vMax, height - (11.5 * vMax));
+  swatch3.size(8 * vMax, 9 * vMax);
   swatch3.style('background-color', colArray[(colShift * 4) + 0]);
   swatch3.class("box");
   swatch3.mousePressed(function() {
@@ -121,8 +121,8 @@ function makeSwatch() {
   });
 
   swatch4 = createButton("");
-  swatch4.position(33 * vMax, height - (11.5 * vMax));
-  swatch4.size(6 * vMax, 9 * vMax);
+  swatch4.position(39 * vMax, height - (11.5 * vMax));
+  swatch4.size(8 * vMax, 9 * vMax);
   swatch4.style("background-color", colArray[(colShift * 4) + 3]);
   swatch4.class("box");
   swatch4.mousePressed(function() {
@@ -133,8 +133,8 @@ function makeSwatch() {
 
 
   selColour = createImg('assets/colSelected.png');
-  selColour.position(15 * vMax, height - (13.9 * vMax));
-  selColour.size(6 * vMax, 13.2 * vMax);
+  selColour.position(15 * vMax, height - (13.5 * vMax));
+  selColour.size(8 * vMax, 13.5 * vMax);
   selColour.mousePressed();
 
   saveNext();
@@ -172,8 +172,8 @@ function changeBrush(brushSel, col, order) {
 
   selColour.remove();
   selColour = createImg('assets/colSelected.png');
-  selColour.position((15 + (order * 6)) * vMax, height - (13.9 * vMax));
-  selColour.size(6 * vMax, 13.2 * vMax);
+  selColour.position((15 + (order * 8)) * vMax, height - (13.5 * vMax));
+  selColour.size(8 * vMax, 13.5 * vMax);
   selColour.mousePressed();
 
 
