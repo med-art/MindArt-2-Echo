@@ -33,8 +33,8 @@ if (slide === 0){
 function slideShow() {
 
   if (slide === 0){
-    background(appCol);
-    introLayer.background(appCol);
+
+
   }
 
   if (slide === introText.length) {

@@ -72,7 +72,6 @@ function setup() {
   backdrop.noStroke();
   paint.noStroke();
   textLayer = createGraphics(windowWidth, windowHeight);
-  introLayer = createGraphics(windowWidth, windowHeight);
 
   slideShow();
   driftY = height/3;
