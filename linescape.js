@@ -163,14 +163,14 @@ function draw() {
 
     //introLayer.image(textLayer, 0, 0, width, height);
     blendMode(BLEND);
-    background(appCol);
+    background(124, 206, 108, 100);
     //image(introLayer, 0, 0, width, height);
 
 
     if (slide > 0) {
 
     blendMode(BLEND);
-      fill(color('#469ede'));
+      fill(70, 158, 222);
       noStroke();
       ellipse(width/2, driftY, ellipseSize, ellipseSize);
 
@@ -342,6 +342,7 @@ function windowResized() {
   newButton.remove();
   saveButton.remove();
   calcDimensions();
-  removeSwatch();
+  removeElements();
   makeSwatch();
+  saveNext();
 }
