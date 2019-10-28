@@ -322,14 +322,8 @@ function saveImg() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  paint.width = width;
-  paint.height = height;
-  sliderImg.width = width;
-  sliderImg.height = height;
-
-
-  // paint.resize(windowWidth, windowHeight);
-  // sliderImg.resize(windowWidth, windowHeight);
+  paint.resize(windowWidth, windowHeight);
+  sliderImg.resize(windowWidth, windowHeight);
   calcDimensions();
   removeElements();
   makeSwatch();
