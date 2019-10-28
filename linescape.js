@@ -21,12 +21,11 @@ let eraseBool = 0;
 
 let vW, vMin, vMax;
 
-let appCol = "#244c6f";
 
 let horizCount = 1,
   vertCount = 3;
 
-  let pixelCount
+let pixelCount
 
 let brushSelected = 1;
 let colSelected = "#ffffff";
@@ -45,6 +44,15 @@ let gridVStextureBool = 0;
 let tileNum = 1;
 
 
+let driftY;
+let inverter = 1;
+
+let audio;
+let ellipseSize;
+
+function preload() {
+  audio = loadSound('assets/audio.mp3');
+}
 
 function setup() {
 
@@ -63,9 +71,13 @@ function setup() {
   sliderImg = createGraphics(width, height);
   backdrop.noStroke();
   paint.noStroke();
+  textLayer = createGraphics(windowWidth, windowHeight);
+  introLayer = createGraphics(windowWidth, windowHeight);
 
-  makeSwatch();
-  newGrid();
+  slideShow();
+  driftY = height/3;
+  ellipseSize = vMax * 10;
+
 
 }
 
@@ -127,23 +139,57 @@ function draw() {
 
   // none of this needs to be in draw - move to a static function.
 
-  blendMode(BLEND);
-  if (gridVStextureBool) {
+  if (introState === 3) {
 
-    for (let i = 0; i < tileNum; i++) {
-      for (let j = 0; j < tileNum; j++) {
-        image(backdrop, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
-        image(paint, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
-        image(foreground, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+
+    blendMode(BLEND);
+    if (gridVStextureBool) {
+
+      for (let i = 0; i < tileNum; i++) {
+        for (let j = 0; j < tileNum; j++) {
+          image(backdrop, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+          image(paint, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+          image(foreground, (width / tileNum) * i, (height / tileNum) * j, width / tileNum, height / tileNum);
+        }
+      }
+
+      image(sliderImg, 0, 0, width, height);
+
+    } else {
+      image(backdrop, 0, 0, width, height);
+      image(paint, 0, 0, width, height);
+      image(foreground, 0, 0, width, height);
+    }
+  } else {
+
+    //introLayer.image(textLayer, 0, 0, width, height);
+    blendMode(BLEND);
+    background(appCol);
+    //image(introLayer, 0, 0, width, height);
+
+
+    if (slide > 0) {
+
+    blendMode(BLEND);
+      fill(color('#469ede'));
+      noStroke();
+      ellipse(width/2, driftY, ellipseSize, ellipseSize);
+
+      driftY = driftY + (2 * inverter);
+
+      if (driftY <= 100 || driftY >= height- 100) {
+        inverter = -inverter;
+        //driftY = driftX + (30 * inverter);
       }
     }
 
-    image(sliderImg, 0, 0, width, height);
+    if (slide === 0) {
+      textLayer.text(introText[slide], width / 2, (height / 8) * (slide + 2));
+    } else {
+      textLayer.text(introText[slide - 1], width / 2, (height / 6) * (slide));
+    } // this if else statgement needs to be replaced with a better system. The current state tracking is not working
+    image(textLayer, 0, 0, width, height);
 
-  } else {
-    image(backdrop, 0, 0, width, height);
-    image(paint, 0, 0, width, height);
-    image(foreground, 0, 0, width, height);
   }
 
 }
@@ -157,19 +203,29 @@ function touchStarted() {
 
 function touchMoved() {
 
-  if (gridVStextureBool) {
-    tileNum = constrain(((width / (mouseX + 20))), 1, 20);
+  if (introState === 3) {
 
-    makeSlider(winMouseX);
+    if (gridVStextureBool) {
+      tileNum = constrain(((width / (mouseX + 20))), 1, 20);
 
-  } else {
-    if (eraseBool === 0) {
-      brushIt(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+      makeSlider(winMouseX);
+
     } else {
-      eraser(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+      if (eraseBool === 0) {
+        brushIt(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+      } else {
+        eraser(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
+      }
+    }
+  } else {
+
+    if (slide > 0) {
+
+      if (dist(width/2,driftY,winMouseX,winMouseY) < ellipseSize/2){
+        ellipseSize++;
+      }
     }
   }
-
 
 
   return false;
