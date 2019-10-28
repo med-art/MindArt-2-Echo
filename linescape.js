@@ -9,24 +9,15 @@ let orderTemp;
 
 let fillCol = 0;
 let paintCol = 0;
-
 let backdrop, paint, foreground;
-
 let faderStart = 0;
-
 let button, newButton, saveButton;
 let swatch1, swatch2, swatch3, swatch4;
-
 let eraseBool = 0;
-
 let vW, vMin, vMax;
-
-
 let horizCount = 1,
   vertCount = 3;
-
 let pixelCount
-
 let brushSelected = 1;
 let colSelected = "#ffffff";
 let colArrayNum = 8;
@@ -201,14 +192,10 @@ function touchStarted() {
 
 
 function touchMoved() {
-
   if (introState === 3) {
-
     if (gridVStextureBool) {
       tileNum = constrain(((width / (mouseX + 20))), 1, 20);
-
       makeSlider(winMouseX);
-
     } else {
       if (eraseBool === 0) {
         brushIt(winMouseX, winMouseY, pwinMouseX, pwinMouseY);
@@ -217,16 +204,12 @@ function touchMoved() {
       }
     }
   } else {
-
     if (slide > 0) {
-
       if (dist(width/2,driftY,winMouseX,winMouseY) < ellipseSize/2){
         ellipseSize++;
       }
     }
   }
-
-
   return false;
 }
 
@@ -338,9 +321,8 @@ function saveImg() {
 
 
 function windowResized() {
+  paint.resizeCanvas(windowWidth, windowHeight);
   resizeCanvas(windowWidth, windowHeight);
-  newButton.remove();
-  saveButton.remove();
   calcDimensions();
   removeElements();
   makeSwatch();
