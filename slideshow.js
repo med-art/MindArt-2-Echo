@@ -3,7 +3,7 @@ let introText = ["Touch", "Look", "Listen", "Touch"];
 let appCol = "#7cce6c";
 
 let slide = 0;
-let delayTime = 8000;
+let delayTime = 80;
 let introState = 0;
 let noiseScale=2;
 
