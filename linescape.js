@@ -108,7 +108,7 @@ function newGrid() {
 
   paint.clear();
   paint.fill(colArray[(colShift * 4) + 1]);
-  paint.rect(-10, -10, width + 20, height + 20); // reason for extra width = strange paint layer on boundary.
+  paint.rect(-10, -10, width + 60, height + 60); // reason for extra width = strange paint layer on boundary.
 
   foreground.clear();
   foreground.stroke(colArray[(colShift * 4) + 1]);
