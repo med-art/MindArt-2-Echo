@@ -326,27 +326,33 @@ function saveImg() {
 
 
 function windowResized() {
+
   resizeCanvas(windowWidth, windowHeight);
+      textLayer.resizeCanvas(windowWidth, windowHeight);
 
-  let paintNew = createGraphics(windowWidth, windowHeight);
-  paintNew.image(paint,0,0,windowWidth, windowHeight);
-  paint.resizeCanvas(windowWidth, windowHeight);
-  paint = paintNew;
+  if (introState === 3){
+    let paintNew = createGraphics(windowWidth, windowHeight);
+    paintNew.image(paint,0,0,windowWidth, windowHeight);
+    paint.resizeCanvas(windowWidth, windowHeight);
+    paint = paintNew;
 
-  let foregroundNew = createGraphics(windowWidth, windowHeight);
-  foregroundNew.image(foreground,0,0,windowWidth, windowHeight);
-  foreground.resizeCanvas(windowWidth, windowHeight);
-  foreground = foregroundNew;
+    let foregroundNew = createGraphics(windowWidth, windowHeight);
+    foregroundNew.image(foreground,0,0,windowWidth, windowHeight);
+    foreground.resizeCanvas(windowWidth, windowHeight);
+    foreground = foregroundNew;
 
-  let backdropNew = createGraphics(windowWidth, windowHeight);
-  backdropNew.image(backdrop,0,0,windowWidth, windowHeight);
-  backdrop.resizeCanvas(windowWidth, windowHeight);
-  backdrop = backdropNew;
+    let backdropNew = createGraphics(windowWidth, windowHeight);
+    backdropNew.image(backdrop,0,0,windowWidth, windowHeight);
+    backdrop.resizeCanvas(windowWidth, windowHeight);
+    backdrop = backdropNew;
 
-  textLayer.resizeCanvas(windowWidth, windowHeight);
-  sliderImg.resizeCanvas(windowWidth, windowHeight);
-  calcDimensions();
-  removeElements();
-  makeSwatch();
-  saveNext();
+    textLayer.resizeCanvas(windowWidth, windowHeight);
+    sliderImg.resizeCanvas(windowWidth, windowHeight);
+    calcDimensions();
+    removeElements();
+    makeSwatch();
+    saveNext();
+  }
+
+
 }
