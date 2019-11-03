@@ -350,8 +350,12 @@ function windowResized() {
     sliderImg.resizeCanvas(windowWidth, windowHeight);
     calcDimensions();
     removeElements();
-    makeSwatch();
+
     saveNext();
+
+    if (!gridVStextureBool){
+        makeSwatch();
+    }
   }
 
 
