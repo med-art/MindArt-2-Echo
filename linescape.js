@@ -162,7 +162,7 @@ function draw() {
 
       //noStroke();
       ellipse(width/2, driftY, ellipseSize, ellipseSize);
-      image(thumbprint, width/2-(vMax*2.5), driftY-(vMax*3.125), vMax*5, vMax*6.25);
+      //image(thumbprint, width/2-(vMax*2.5), driftY-(vMax*3.125), vMax*5, vMax*6.25);
 
       driftY = driftY + (2 * inverter);
 
@@ -193,7 +193,7 @@ strokeWeight(10);
 function touchMoved() {
   if (introState === 3) {
     if (gridVStextureBool) {
-      tileNum = constrain(((width / (mouseY + 20))), 1, 20);
+      tileNum = constrain(((height / (mouseY + 20))), 1, 20);
       makeSlider(winMouseX);
     } else {
       if (eraseBool === 0) {
