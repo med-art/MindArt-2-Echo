@@ -26,7 +26,7 @@ let selColour;
 
 let colShift = 0;
 
-let gridLineSize = 12;
+let gridLineSize = 17;
 
 let stage = 0;
 
@@ -78,7 +78,7 @@ function newGrid() {
     vertCount = 3;
     horizCount = 2;
     stage = 0;
-    gridLineSize = 12;
+    gridLineSize = 17;
   }
 
   fillCol = 5;
