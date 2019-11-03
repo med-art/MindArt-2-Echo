@@ -206,10 +206,10 @@ function makeSlider(_mouseX) {
 
   sliderImg.clear();
   sliderImg.stroke(255);
-  sliderImg.strokeWeight(8.5*hMax);
+  sliderImg.strokeWeight(9*hMax);
   sliderImg.line(8 * hMax, 8 * hMax, 8*hMax, height - (8 * hMax));
   sliderImg.stroke("#5cf22c");
-  sliderImg.strokeWeight(10*hMax);
+  sliderImg.strokeWeight(9*hMax);
   sliderImg.line(8 * hMax, 8 * hMax, 8*hMax, constrain(mouseY, 8*hMax, height - (8 * hMax)));
   sliderImg.imageMode(CENTER);
   sliderImg.image(sliderIcon, 8*hMax, constrain(mouseY, 8*hMax, height - (8 * hMax)), 8.5*hMax, 8.5*hMax);
