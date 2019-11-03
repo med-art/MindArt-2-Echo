@@ -3,6 +3,7 @@ let fsButton;
 
 function calcDimensions() {
   vW = width / 100;
+  hMax = height/100;
 
   if (width > height) {
     vMax = width / 100;
@@ -189,13 +190,13 @@ function makeSlider(_mouseX) {
 
   sliderImg.clear();
   sliderImg.stroke(255);
-  sliderImg.strokeWeight(60);
-  sliderImg.line(6 * vMax, 6 * vMax, 6*vMax, height - (6 * vMax));
+  sliderImg.strokeWeight(13*hMax);
+  sliderImg.line(10 * hMax, 10 * hMax, 10*hMax, height - (10 * hMax));
   sliderImg.stroke("#5cf22c");
-  sliderImg.strokeWeight(60);
-  sliderImg.line(6 * vMax, 6 * vMax, 6*vMax, constrain(mouseY, 6*vMax, height - (6 * vMax)));
+  sliderImg.strokeWeight(13*hMax);
+  sliderImg.line(10 * hMax, 10 * hMax, 10*hMax, constrain(mouseY, 10*hMax, height - (10 * hMax)));
   sliderImg.imageMode(CENTER);
-  sliderImg.image(sliderIcon, 6*vMax, constrain(mouseY, 6*vMax, height - (6 * vMax)), 60, 60);
+  sliderImg.image(sliderIcon, 10*hMax, constrain(mouseY, 10*hMax, height - (10 * hMax)), 13*hMax, 13*hMax);
 
 
 }
