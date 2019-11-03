@@ -32,6 +32,19 @@ transform: translate(-50%, -50%);
 
 }
 
+.startButton {
+  font-size: 5vmax;
+  font-family: "AvenirNext";
+  letter-spacing: 1px;
+  font-weight: 700;
+  background-color: transparent;
+  color: white;
+  border-width: 5px;
+  border-radius: 5vmax;
+  width: 28vmax;
+  height: 10vmax;
+}
+
 .box {
   border-width: 0;
   border-color: rgb(200, 200, 200);

@@ -97,6 +97,8 @@ function saveNext() {
 
 function changeBrush(brushSel, col, order) {
 
+  click.play();
+
   if (eraseBool === 1) {
 
     invertButton();
@@ -125,7 +127,7 @@ function invertButton() {
 
 
 
-
+  click.play();
 
   if (eraseBool === 0) {
     selColour.remove();
@@ -166,6 +168,7 @@ function removeSwatch() {
 }
 
 function gridVStexture() {
+      click.play();
 
   gridVStextureBool = !gridVStextureBool;
 
@@ -186,21 +189,20 @@ function makeSlider(_mouseX) {
 
   sliderImg.clear();
   sliderImg.stroke(255);
-  sliderImg.strokeWeight(8);
-  sliderImg.line(width * 0.04, height - (6 * vMax), width * 0.82, height - (6 * vMax));
-  sliderImg.stroke(0,0,0);
-  sliderImg.strokeWeight(30);
-  sliderImg.line(50, height - (6 * vMax), constrain(_mouseX, width * 0.04, width * 0.82), height - (6 * vMax));
-  sliderImg.rectMode(RADIUS);
-  sliderImg.fill("#5cf22c");
-  sliderImg.noStroke();
-  sliderImg.rect(constrain(_mouseX, width * 0.04, width * 0.82), height - (6 * vMax), 1 * vMax, 5 * vMax);
+  sliderImg.strokeWeight(60);
+  sliderImg.line(6 * vMax, 6 * vMax, 6*vMax, height - (6 * vMax));
+  sliderImg.stroke("#5cf22c");
+  sliderImg.strokeWeight(60);
+  sliderImg.line(6 * vMax, 6 * vMax, 6*vMax, constrain(mouseY, 6*vMax, height - (6 * vMax)));
+  sliderImg.imageMode(CENTER);
+  sliderImg.image(sliderIcon, 6*vMax, constrain(mouseY, 6*vMax, height - (6 * vMax)), 60, 60);
 
 
 }
 
 function fs(){
 
+  click.play();
 
  if (!fsBool){
    fullscreen(1);

@@ -31,27 +31,25 @@ let gridLineSize = 12;
 let stage = 0;
 
 let gridVStextureBool = 0;
-
 let tileNum = 1;
-
-
 let driftY;
 let inverter = 1;
-
 let audio;
 let ellipseSize;
+let sliderIcon;
+let alphaTemp;
+let thumbprint;
 
 function preload() {
   audio = loadSound('assets/audio.mp3');
+  click = loadSound('assets/click.mp3');
+  sliderIcon = loadImage('assets/slider.png');
+  thumbprint = loadImage('assets/thumbprint.png');
 }
 
 function setup() {
-
   createCanvas(windowWidth - 6, windowHeight - 6);
-
   calcDimensions();
-
-
   background(51);
   backdrop = createGraphics(width, height);
   backdrop.colorMode(RGB, 255, 255, 255, 1000);
@@ -63,12 +61,11 @@ function setup() {
   backdrop.noStroke();
   paint.noStroke();
   textLayer = createGraphics(windowWidth, windowHeight);
-
+    slide = 0;
   slideShow();
   driftY = height/3;
   ellipseSize = vMax * 10;
-
-
+  fill(70, 158, 222);
 }
 
 
@@ -152,18 +149,20 @@ function draw() {
     }
   } else {
 
-    //introLayer.image(textLayer, 0, 0, width, height);
+
     blendMode(BLEND);
-    background(124, 206, 108, 100);
-    //image(introLayer, 0, 0, width, height);
+    background(124, 206, 108, alphaTemp);
+
+
 
 
     if (slide > 0) {
 
     blendMode(BLEND);
-      fill(70, 158, 222);
-      noStroke();
+
+      //noStroke();
       ellipse(width/2, driftY, ellipseSize, ellipseSize);
+      image(thumbprint, width/2-(vMax*2.5), driftY-(vMax*3.125), vMax*5, vMax*6.25);
 
       driftY = driftY + (2 * inverter);
 
@@ -174,7 +173,6 @@ function draw() {
     }
 
     if (slide === 0) {
-      textLayer.text(introText[slide], width / 2, (height / 8) * (slide + 2));
     } else {
       textLayer.text(introText[slide - 1], width / 2, (height / 6) * (slide));
     } // this if else statgement needs to be replaced with a better system. The current state tracking is not working
@@ -184,17 +182,18 @@ function draw() {
 
 }
 
-function touchStarted() {
-  //brushSelected = int(random(0,6));
-  faderStart = 0;
-
+function touchEnded(){
+strokeWeight(10);
+  stroke("#469ede");
+  fill(255,255,255,50);
+  alphaTemp = 100;
 }
 
 
 function touchMoved() {
   if (introState === 3) {
     if (gridVStextureBool) {
-      tileNum = constrain(((width / (mouseX + 20))), 1, 20);
+      tileNum = constrain(((width / (mouseY + 20))), 1, 20);
       makeSlider(winMouseX);
     } else {
       if (eraseBool === 0) {
@@ -206,7 +205,10 @@ function touchMoved() {
   } else {
     if (slide > 0) {
       if (dist(width/2,driftY,winMouseX,winMouseY) < ellipseSize/2){
-        ellipseSize++;
+    fill("#469ede");
+    noStroke();
+    alphaTemp = 5;
+        ellipseSize+=0.55;
       }
     }
   }
@@ -297,6 +299,8 @@ function brushIt(_x, _y, pX, pY) {
 }
 
 function saveImg() {
+
+  click.play();
 
   blendMode(BLEND);
   if (gridVStextureBool) {
