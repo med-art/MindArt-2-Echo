@@ -190,13 +190,13 @@ function makeSlider(_mouseX) {
 
   sliderImg.clear();
   sliderImg.stroke(255);
-  sliderImg.strokeWeight(13*hMax);
-  sliderImg.line(10 * hMax, 10 * hMax, 10*hMax, height - (10 * hMax));
+  sliderImg.strokeWeight(10*hMax);
+  sliderImg.line(8 * hMax, 8 * hMax, 8*hMax, height - (8 * hMax));
   sliderImg.stroke("#5cf22c");
-  sliderImg.strokeWeight(13*hMax);
-  sliderImg.line(10 * hMax, 10 * hMax, 10*hMax, constrain(mouseY, 10*hMax, height - (10 * hMax)));
+  sliderImg.strokeWeight(10*hMax);
+  sliderImg.line(8 * hMax, 8 * hMax, 8*hMax, constrain(mouseY, 8*hMax, height - (8 * hMax)));
   sliderImg.imageMode(CENTER);
-  sliderImg.image(sliderIcon, 10*hMax, constrain(mouseY, 10*hMax, height - (10 * hMax)), 13*hMax, 13*hMax);
+  sliderImg.image(sliderIcon, 8*hMax, constrain(mouseY, 8*hMax, height - (8 * hMax)), 10*hMax, 10*hMax);
 
 
 }
