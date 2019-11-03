@@ -30,6 +30,7 @@ function slideShow() {
   if (slide === introText.length) {
     textLayer.clear();
     introState = 3;
+    windowResized();
     makeSwatch();
     newGrid();
     //restart();
