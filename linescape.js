@@ -338,16 +338,15 @@ function windowResized() {
   foreground.resizeCanvas(windowWidth, windowHeight);
   foreground = foregroundNew;
 
-  let backgroundNew = createGraphics(windowWidth, windowHeight);
-  backgroundNew.image(background,0,0,windowWidth, windowHeight);
-  background.resizeCanvas(windowWidth, windowHeight);
-  background = backgroundNew;
+  let backdropNew = createGraphics(windowWidth, windowHeight);
+  backdropNew.image(backdrop,0,0,windowWidth, windowHeight);
+  backdrop.resizeCanvas(windowWidth, windowHeight);
+  backdrop = backdropNew;
 
   textLayer.resizeCanvas(windowWidth, windowHeight);
   sliderImg.resizeCanvas(windowWidth, windowHeight);
   calcDimensions();
   removeElements();
-
   makeSwatch();
   saveNext();
 }
