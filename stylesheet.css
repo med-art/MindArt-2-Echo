@@ -18,7 +18,7 @@ transform: translate(-50%, -50%);
 
 
 .select {
-  font-size: 1.5vmax;
+  font-size: 1vmax;
   font-family: "AvenirNext";
   letter-spacing: 1px;
   font-weight: 700;
@@ -27,9 +27,8 @@ transform: translate(-50%, -50%);
   border-width: 3;
 
   border-radius: 0.7vmax;
-  width: 12vmax;
-  height: 3vmax;
-
+  width: 13vmax;
+  height: 4vmax;
 }
 
 .startButton {
